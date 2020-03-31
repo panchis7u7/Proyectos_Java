@@ -5,17 +5,72 @@
  */
 package prii_u207_ventanasmid;
 
+import java.awt.Image;
+import java.awt.print.PrinterException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author Katherine Arzate
  */
 public class PanelHijo extends javax.swing.JPanel {
-
-    /**
-     * Creates new form PanelHijo
-     */
+    Icon icYoshoku;
+    DefaultComboBoxModel sucursales; 
+    
     public PanelHijo() {
         initComponents();
+        
+        lblYoshoku.setSize(270,100);
+        ImageIcon imgIcYosh = new ImageIcon (getClass().getResource("yoshoku.jpeg"));
+        Image imgEscaladaYosh = imgIcYosh.getImage().getScaledInstance(270, 100, Image.SCALE_SMOOTH); 
+        icYoshoku = new ImageIcon(imgEscaladaYosh);
+        lblYoshoku.setIcon(icYoshoku);
+        
+        String sucursal[] = {"Sucursal: Hospitales", "Sucursal: Centro", "Sucursal: Santa María"};
+        sucursales = new DefaultComboBoxModel(sucursal);
+        cboxSucursal.setModel(sucursales);
+        generarNota();
+    }
+    
+    public void generarNota(){
+        taNota.setText(" \"YOSHOKU\" \n");
+        switch(cboxSucursal.getSelectedIndex()){
+            case 0: taNota.append("Sucursal HOSPITALES\n"); break;
+            case 1: taNota.append("Sucursal CENTRO\n"); break;
+            case 2: taNota.append("Sucursal SANTA MARÍA\n"); break;
+        }
+        
+        if(rbYakimeshi.isSelected()) taNota.append("\nPlatillo: Yakimeshi");
+        if(rbMakis.isSelected()) taNota.append("\nPlatillo: Makis");
+        if(rbYakisoba.isSelected()) taNota.append("\nPlatillo: Yakisoba");
+        if(rbKushiague.isSelected()) taNota.append("\nPlatillo: Kushiague");
+
+        if(cbPollo.isSelected() || cbRes.isSelected() || cbPulpo.isSelected() || cbCamaron.isSelected()) 
+            taNota.append("\nCarnes: ");
+        if(cbPollo.isSelected()) taNota.append("\n- Pollo");
+        if(cbRes.isSelected()) taNota.append("\n- Res");
+        if(cbPulpo.isSelected()) taNota.append("\n- Pulpo");
+        if(cbCamaron.isSelected()) taNota.append("\n- Camarón");
+        
+        if(cbAguacate.isSelected() || cbManchego.isSelected() || cbPepino.isSelected() || cbPhiladelphia.isSelected()) 
+            taNota.append("\nExtras: ");
+        if(cbAguacate.isSelected()) taNota.append("\n- Aguacate");
+        if(cbManchego.isSelected()) taNota.append("\n- Manchego");
+        if(cbPepino.isSelected()) taNota.append("\n- Pepino");
+        if(cbPhiladelphia.isSelected()) taNota.append("\n- Philadelphia");
+        
+        if(taComentarios.getText() != "") 
+            taNota.append("\nComentarios: "+taComentarios.getText());
     }
 
     /**
@@ -27,38 +82,403 @@ public class PanelHijo extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btngPlatillos = new javax.swing.ButtonGroup();
         jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        btnImprimir = new javax.swing.JButton();
+        lblYoshoku = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        rbYakimeshi = new javax.swing.JRadioButton();
+        rbMakis = new javax.swing.JRadioButton();
+        rbYakisoba = new javax.swing.JRadioButton();
+        rbKushiague = new javax.swing.JRadioButton();
+        jPanel2 = new javax.swing.JPanel();
+        cbPollo = new javax.swing.JCheckBox();
+        cbRes = new javax.swing.JCheckBox();
+        cbCamaron = new javax.swing.JCheckBox();
+        cbPulpo = new javax.swing.JCheckBox();
+        jPanel3 = new javax.swing.JPanel();
+        cbAguacate = new javax.swing.JCheckBox();
+        cbManchego = new javax.swing.JCheckBox();
+        cbPepino = new javax.swing.JCheckBox();
+        cbPhiladelphia = new javax.swing.JCheckBox();
+        cboxSucursal = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        taNota = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        taComentarios = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         jToolBar1.setRollover(true);
 
-        jButton1.setText("jButton1");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton1);
+        btnGuardar.setText("Guardar");
+        btnGuardar.setFocusable(false);
+        btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnGuardar);
+
+        btnImprimir.setText("Imprimir");
+        btnImprimir.setFocusable(false);
+        btnImprimir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnImprimir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnImprimir);
+
+        lblYoshoku.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Platillo"));
+
+        btngPlatillos.add(rbYakimeshi);
+        rbYakimeshi.setText("Yakimeshi");
+        rbYakimeshi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clicPlatillo(evt);
+            }
+        });
+
+        btngPlatillos.add(rbMakis);
+        rbMakis.setText("Makis");
+        rbMakis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clicPlatillo(evt);
+            }
+        });
+
+        btngPlatillos.add(rbYakisoba);
+        rbYakisoba.setText("Yakisoba");
+        rbYakisoba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clicPlatillo(evt);
+            }
+        });
+
+        btngPlatillos.add(rbKushiague);
+        rbKushiague.setText("Kushiague");
+        rbKushiague.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clicPlatillo(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(rbYakimeshi)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rbMakis)
+                .addGap(12, 12, 12)
+                .addComponent(rbYakisoba)
+                .addGap(12, 12, 12)
+                .addComponent(rbKushiague)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbYakimeshi)
+                    .addComponent(rbMakis)
+                    .addComponent(rbYakisoba)
+                    .addComponent(rbKushiague))
+                .addGap(24, 24, 24))
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Carnes"));
+
+        cbPollo.setText("Pollo");
+        cbPollo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clicCarne(evt);
+            }
+        });
+
+        cbRes.setText("Res");
+        cbRes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clicCarne(evt);
+            }
+        });
+
+        cbCamaron.setText("Camarón");
+        cbCamaron.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clicCarne(evt);
+            }
+        });
+
+        cbPulpo.setText("Pulpo");
+        cbPulpo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clicCarne(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cbPollo)
+                .addGap(40, 40, 40)
+                .addComponent(cbRes)
+                .addGap(32, 32, 32)
+                .addComponent(cbPulpo)
+                .addGap(36, 36, 36)
+                .addComponent(cbCamaron)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbPollo)
+                    .addComponent(cbCamaron)
+                    .addComponent(cbPulpo)
+                    .addComponent(cbRes)))
+        );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Extras"));
+
+        cbAguacate.setText("Aguacate");
+        cbAguacate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clicExtra(evt);
+            }
+        });
+
+        cbManchego.setText("Manchego");
+        cbManchego.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clicExtra(evt);
+            }
+        });
+
+        cbPepino.setText("Pepino");
+        cbPepino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clicExtra(evt);
+            }
+        });
+
+        cbPhiladelphia.setText("Philadelphia");
+        cbPhiladelphia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clicExtra(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cbAguacate)
+                .addGap(18, 18, 18)
+                .addComponent(cbPepino)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbManchego)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbPhiladelphia)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbAguacate)
+                    .addComponent(cbManchego)
+                    .addComponent(cbPepino)
+                    .addComponent(cbPhiladelphia))
+                .addContainerGap())
+        );
+
+        cboxSucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboxSucursal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboxSucursalActionPerformed(evt);
+                clicSucursal(evt);
+            }
+        });
+
+        taNota.setColumns(20);
+        taNota.setRows(5);
+        jScrollPane1.setViewportView(taNota);
+
+        taComentarios.setColumns(20);
+        taComentarios.setRows(5);
+        taComentarios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                taComentariosKeyReleased(evt);
+            }
+        });
+        jScrollPane2.setViewportView(taComentarios);
+
+        jLabel1.setText("Comentarios:");
+
+        jLabel2.setText("Nota: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cboxSucursal, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(lblYoshoku, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblYoshoku, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cboxSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addGap(22, 22, 22))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+                JFileChooser browser = new JFileChooser();
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos de texto","txt");
+        browser.setFileFilter(filtro);
+        int resultado = browser.showSaveDialog(null);
+        if(resultado == JFileChooser.APPROVE_OPTION){
+            String arch = browser.getSelectedFile().getAbsolutePath()+".txt";
+            String nota = taNota.getText();
+            String mensaje = "grabado exitoso";
+            FileWriter writer = null;
+            try {
+                writer = new FileWriter(arch);
+                BufferedWriter buffer = new BufferedWriter(writer);
+                buffer.write(nota);
+                buffer.close();
+            } catch (IOException ex) {
+                mensaje = "error al grabar";
+                Logger.getLogger(PanelHijo.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    writer.close();
+                    JOptionPane.showMessageDialog(browser, mensaje);
+                } catch (IOException ex) {
+                    Logger.getLogger(PanelHijo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+        try {
+            taNota.print();
+        } catch (PrinterException ex) {
+            Logger.getLogger(PanelHijo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnImprimirActionPerformed
+
+    private void cboxSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxSucursalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboxSucursalActionPerformed
+
+    private void clicPlatillo(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clicPlatillo
+        generarNota();
+    }//GEN-LAST:event_clicPlatillo
+
+    private void clicCarne(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clicCarne
+        generarNota();
+    }//GEN-LAST:event_clicCarne
+
+    private void clicExtra(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clicExtra
+        generarNota();
+    }//GEN-LAST:event_clicExtra
+
+    private void clicSucursal(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clicSucursal
+        generarNota();
+    }//GEN-LAST:event_clicSucursal
+
+    private void taComentariosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_taComentariosKeyReleased
+        generarNota();
+    }//GEN-LAST:event_taComentariosKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnImprimir;
+    private javax.swing.ButtonGroup btngPlatillos;
+    private javax.swing.JCheckBox cbAguacate;
+    private javax.swing.JCheckBox cbCamaron;
+    private javax.swing.JCheckBox cbManchego;
+    private javax.swing.JCheckBox cbPepino;
+    private javax.swing.JCheckBox cbPhiladelphia;
+    private javax.swing.JCheckBox cbPollo;
+    private javax.swing.JCheckBox cbPulpo;
+    private javax.swing.JCheckBox cbRes;
+    private javax.swing.JComboBox<String> cboxSucursal;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lblYoshoku;
+    private javax.swing.JRadioButton rbKushiague;
+    private javax.swing.JRadioButton rbMakis;
+    private javax.swing.JRadioButton rbYakimeshi;
+    private javax.swing.JRadioButton rbYakisoba;
+    private javax.swing.JTextArea taComentarios;
+    private javax.swing.JTextArea taNota;
     // End of variables declaration//GEN-END:variables
 }

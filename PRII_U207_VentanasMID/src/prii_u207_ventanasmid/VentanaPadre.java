@@ -5,8 +5,11 @@
  */
 package prii_u207_ventanasmid;
 
+import java.awt.Dimension;
+import static java.lang.System.exit;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,10 +36,12 @@ public class VentanaPadre extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        mbarAutores = new javax.swing.JMenuBar();
+        menuOrdenTrabajo = new javax.swing.JMenu();
+        mitemNuevaOrden = new javax.swing.JMenuItem();
+        mitemSalir = new javax.swing.JMenuItem();
+        menuAcerca = new javax.swing.JMenu();
+        mitemAutores = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,29 +49,46 @@ public class VentanaPadre extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 657, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGap(0, 589, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("File");
+        menuOrdenTrabajo.setText("Orden de trabajo");
 
-        jMenuItem1.setText("jMenuItem1");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        mitemNuevaOrden.setText("Nueva orden");
+        mitemNuevaOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                mitemNuevaOrdenActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        menuOrdenTrabajo.add(mitemNuevaOrden);
 
-        jMenuBar1.add(jMenu1);
+        mitemSalir.setText("Salir");
+        mitemSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitemSalirActionPerformed(evt);
+            }
+        });
+        menuOrdenTrabajo.add(mitemSalir);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        mbarAutores.add(menuOrdenTrabajo);
 
-        setJMenuBar(jMenuBar1);
+        menuAcerca.setText("Acerca de ");
+
+        mitemAutores.setText("Autores");
+        mitemAutores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitemAutoresActionPerformed(evt);
+            }
+        });
+        menuAcerca.add(mitemAutores);
+
+        mbarAutores.add(menuAcerca);
+
+        setJMenuBar(mbarAutores);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,23 +98,32 @@ public class VentanaPadre extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        JInternalFrame vhija= new JInternalFrame("Orden de trabajo",true,true,true,true);
+    private void mitemNuevaOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemNuevaOrdenActionPerformed
+        JInternalFrame vhija= new JInternalFrame("Orden de trabajo",true,true,false,true);
 
         PanelHijo hijo=new PanelHijo();
-
         vhija.add(hijo);
         vhija.pack();
         vhija.setVisible(true);
 
         escritorio.add(vhija); 
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_mitemNuevaOrdenActionPerformed
+
+    private void mitemAutoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemAutoresActionPerformed
+        JOptionPane.showMessageDialog(null, "Alumnos: \nKatherine Arzate Serrano \nCarlos Sebastian Madrigal Rodriguez");
+    }//GEN-LAST:event_mitemAutoresActionPerformed
+
+    private void mitemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemSalirActionPerformed
+        exit(0);
+    }//GEN-LAST:event_mitemSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,9 +162,11 @@ public class VentanaPadre extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuBar mbarAutores;
+    private javax.swing.JMenu menuAcerca;
+    private javax.swing.JMenu menuOrdenTrabajo;
+    private javax.swing.JMenuItem mitemAutores;
+    private javax.swing.JMenuItem mitemNuevaOrden;
+    private javax.swing.JMenuItem mitemSalir;
     // End of variables declaration//GEN-END:variables
 }
