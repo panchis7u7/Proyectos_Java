@@ -15,7 +15,10 @@ public class Programa {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        VentanaPadre v1 = new VentanaPadre();
+        v1.setVisible(true);
+        v1.setLocationRelativeTo(null);
+        v1.setTitle("Ordenes de trabajo");
     }
     
 }
