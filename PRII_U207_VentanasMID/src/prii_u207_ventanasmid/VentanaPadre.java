@@ -1,21 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package prii_u207_ventanasmid;
+import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
 
 /**
- *
- * @author smadr
+ * @author Katherine Arzate Serrano
+ * @author Carlos Sebastian Madrigal Rodriguez
  */
 public class VentanaPadre extends javax.swing.JFrame {
-
-    /**
-     * Creates new form VentanaPadre
-     */
+    private JDesktopPane escritorio;
     public VentanaPadre() {
-        
+        escritorio = new JDesktopPane();
+        this.setContentPane(escritorio);
+        this.pack();
         initComponents();
     }
 
@@ -28,7 +24,45 @@ public class VentanaPadre extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        miNueva_Orden = new javax.swing.JMenuItem();
+        mi_Salir = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+
+        jMenuItem1.setText("jMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jMenu1.setText("File");
+
+        miNueva_Orden.setText("Nueva Orden");
+        miNueva_Orden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miNueva_OrdenActionPerformed(evt);
+            }
+        });
+        jMenu1.add(miNueva_Orden);
+
+        mi_Salir.setText("Salir");
+        mi_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mi_SalirActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mi_Salir);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Menu");
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -38,11 +72,27 @@ public class VentanaPadre extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 277, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void miNueva_OrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNueva_OrdenActionPerformed
+        // TODO add your handling code here:
+        JInternalFrame v_hija = new JInternalFrame("Orden de Trabajo", true, true, true, true);
+        PanelHijo hijo = new PanelHijo();
+        
+        v_hija.add(hijo);
+        v_hija.pack();
+        v_hija.setVisible(true);
+        
+        escritorio.add(v_hija);
+    }//GEN-LAST:event_miNueva_OrdenActionPerformed
+
+    private void mi_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_SalirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mi_SalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -80,5 +130,12 @@ public class VentanaPadre extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem miNueva_Orden;
+    private javax.swing.JMenuItem mi_Salir;
     // End of variables declaration//GEN-END:variables
 }

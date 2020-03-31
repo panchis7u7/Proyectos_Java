@@ -1,21 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package prii_u207_ventanasmid;
-
 /**
- *
- * @author smadr
+ * @author Katherine Arzate Serrano
+ * @author Carlos Sebastian Madrigal Rodriguez
  */
 public class Programa {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
+public void main(String[] args) {
         // TODO code application logic here
+        VentanaPadre v = new VentanaPadre();
+        v.setTitle("Ordenes de Trabajo");
+        v.setLocationRelativeTo(null);
+        v.setVisible(true);
     }
-    
 }
