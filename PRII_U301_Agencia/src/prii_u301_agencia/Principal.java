@@ -1,5 +1,18 @@
 package prii_u301_agencia;
 
+//<<<<<<< HEAD
+import agregar_gestionar.AgenciaAgregar;
+import agregar_gestionar.AgenciaGestionar;
+import agregar_gestionar.ClienteGestionar;
+import agregar_gestionar.ClienteAgregar;
+import agregar_gestionar.GarajeAgregar;
+import agregar_gestionar.GarajeGestionar;
+import agregar_gestionar.ReservaAgregar;
+import agregar_gestionar.ReservaGestionar;
+import agregar_gestionar.VehiculoAgregar;
+import agregar_gestionar.VehiculoGestionar;
+//=======
+//>>>>>>> f289be80d4a9e9abe0472f884b97ea1fc25a2481
 import java.io.FileNotFoundException;
 import static java.lang.System.exit;
 import java.util.logging.Level;
@@ -87,17 +100,37 @@ public class Principal extends javax.swing.JFrame {
         jmVehiculos.setText("Vehiculos");
 
         miAgVehiculo.setText("Agregar vehiculo");
+        miAgVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAgVehiculoActionPerformed(evt);
+            }
+        });
         jmVehiculos.add(miAgVehiculo);
 
         miGeVehiculo.setText("Gestionar vehiculo");
+        miGeVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miGeVehiculoActionPerformed(evt);
+            }
+        });
         jmVehiculos.add(miGeVehiculo);
 
         jmGarajes.setText("Garajes");
 
         miAgGaraje.setText("Agregar garaje");
+        miAgGaraje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAgGarajeActionPerformed(evt);
+            }
+        });
         jmGarajes.add(miAgGaraje);
 
         miGeGaraje.setText("Gestionar garaje");
+        miGeGaraje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miGeGarajeActionPerformed(evt);
+            }
+        });
         jmGarajes.add(miGeGaraje);
 
         jmVehiculos.add(jmGarajes);
@@ -107,9 +140,19 @@ public class Principal extends javax.swing.JFrame {
         jmAgencias.setText("Agencias");
 
         miAgAgencia.setText("Agregar agencia");
+        miAgAgencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAgAgenciaActionPerformed(evt);
+            }
+        });
         jmAgencias.add(miAgAgencia);
 
         miGeAgencia.setText("Gestionar agencia");
+        miGeAgencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miGeAgenciaActionPerformed(evt);
+            }
+        });
         jmAgencias.add(miGeAgencia);
 
         jMenu1.add(jmAgencias);
@@ -135,6 +178,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu2.add(miAgReserva);
 
         miGeReserva.setText("Gestionar reserva");
+        miGeReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miGeReservaActionPerformed(evt);
+            }
+        });
         jMenu2.add(miGeReserva);
 
         jMenuBar1.add(jMenu2);
@@ -175,11 +223,16 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_mitExitActionPerformed
 
     private void miAgReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAgReservaActionPerformed
-        // TODO add your handling code here:
+        JInternalFrame vhija = new JInternalFrame("Nueva Reserva", false, true, false, false);
+        ReservaAgregar  hijo = new ReservaAgregar();
+        vhija.add(hijo);
+        vhija.pack();
+        vhija.setVisible(true);
+        escritorio.add(vhija);
     }//GEN-LAST:event_miAgReservaActionPerformed
 
     private void miAgClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAgClienteActionPerformed
-        JInternalFrame vhija = new JInternalFrame("Agregar Cliente", false, true, false, false);
+        JInternalFrame vhija = new JInternalFrame("Nuevo Cliente", false, true, false, false);
         ClienteAgregar  hijo = new ClienteAgregar();
         vhija.add(hijo);
         vhija.pack();
@@ -189,13 +242,75 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_miAgClienteActionPerformed
 
     private void miGeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miGeClienteActionPerformed
-        JInternalFrame vhija = new JInternalFrame("Agregar Cliente", false, true, false, false);
+        JInternalFrame vhija = new JInternalFrame("Gestionar Clientes", false, true, false, false);
         ClienteGestionar  hijo = new ClienteGestionar();
         vhija.add(hijo);
         vhija.pack();
         vhija.setVisible(true);
         escritorio.add(vhija);
     }//GEN-LAST:event_miGeClienteActionPerformed
+
+    private void miAgAgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAgAgenciaActionPerformed
+        JInternalFrame vhija = new JInternalFrame("Nueva Agencia", false, true, false, false);
+        AgenciaAgregar  hijo = new AgenciaAgregar();
+        vhija.add(hijo);
+        vhija.pack();
+        vhija.setVisible(true);
+        escritorio.add(vhija);
+    }//GEN-LAST:event_miAgAgenciaActionPerformed
+
+    private void miAgVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAgVehiculoActionPerformed
+        JInternalFrame vhija = new JInternalFrame("Nuevo Vehiculo", false, true, false, false);
+        VehiculoAgregar  hijo = new VehiculoAgregar();
+        vhija.add(hijo);
+        vhija.pack();
+        vhija.setVisible(true);
+        escritorio.add(vhija);
+    }//GEN-LAST:event_miAgVehiculoActionPerformed
+
+    private void miAgGarajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAgGarajeActionPerformed
+        JInternalFrame vhija = new JInternalFrame("Nuevo Garaje", false, true, false, false);
+        GarajeAgregar  hijo = new GarajeAgregar();
+        vhija.add(hijo);
+        vhija.pack();
+        vhija.setVisible(true);
+        escritorio.add(vhija);
+    }//GEN-LAST:event_miAgGarajeActionPerformed
+
+    private void miGeVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miGeVehiculoActionPerformed
+        JInternalFrame vhija = new JInternalFrame("Gestionar Vehiculos", false, true, false, false);
+        VehiculoGestionar  hijo = new VehiculoGestionar();
+        vhija.add(hijo);
+        vhija.pack();
+        vhija.setVisible(true);
+        escritorio.add(vhija);
+    }//GEN-LAST:event_miGeVehiculoActionPerformed
+
+    private void miGeGarajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miGeGarajeActionPerformed
+        JInternalFrame vhija = new JInternalFrame("Gestionar Garajes", false, true, false, false);
+        GarajeGestionar  hijo = new GarajeGestionar();
+        vhija.add(hijo);
+        vhija.pack();
+        vhija.setVisible(true);
+        escritorio.add(vhija);
+    }//GEN-LAST:event_miGeGarajeActionPerformed
+
+    private void miGeAgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miGeAgenciaActionPerformed
+        JInternalFrame vhija = new JInternalFrame("Gestionar Agencias", false, true, false, false);
+        AgenciaGestionar  hijo = new AgenciaGestionar();
+        vhija.add(hijo);
+        vhija.pack();
+        vhija.setVisible(true);
+        escritorio.add(vhija);    }//GEN-LAST:event_miGeAgenciaActionPerformed
+
+    private void miGeReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miGeReservaActionPerformed
+        JInternalFrame vhija = new JInternalFrame("Gestionar Reservas", false, true, false, false);
+        ReservaGestionar  hijo = new ReservaGestionar();
+        vhija.add(hijo);
+        vhija.pack();
+        vhija.setVisible(true);
+        escritorio.add(vhija);
+    }//GEN-LAST:event_miGeReservaActionPerformed
 
     /**
      * @param args the command line arguments

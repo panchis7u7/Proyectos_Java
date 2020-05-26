@@ -49,11 +49,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Agregar vehiculo"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAgVehiculoActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="miGeVehiculo">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Gestionar vehiculo"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miGeVehiculoActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <Menu class="javax.swing.JMenu" name="jmGarajes">
                   <Properties>
@@ -64,11 +70,17 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Agregar garaje"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAgGarajeActionPerformed"/>
+                      </Events>
                     </MenuItem>
                     <MenuItem class="javax.swing.JMenuItem" name="miGeGaraje">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Gestionar garaje"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miGeGarajeActionPerformed"/>
+                      </Events>
                     </MenuItem>
                   </SubComponents>
                 </Menu>
@@ -83,11 +95,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Agregar agencia"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAgAgenciaActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="miGeAgencia">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Gestionar agencia"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miGeAgenciaActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -118,6 +136,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gestionar reserva"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miGeReservaActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

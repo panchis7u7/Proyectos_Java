@@ -1,5 +1,6 @@
 package prii_u301_agencia;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -11,7 +12,7 @@ import javax.swing.JOptionPane;
  */
 public class Conector {
     public java.sql.Connection miconector = null;
-    String contrasena = "";
+    String contrasena = "Ashkeyi1012324";
  
     public Conector() {
         try{
