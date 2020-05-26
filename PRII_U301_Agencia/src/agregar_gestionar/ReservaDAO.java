@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author Katherine Arzate
@@ -27,7 +29,7 @@ public class ReservaDAO {
         int id = 0;
         
         String sql = "INSERT INTO Reservas "
-                +  "(id_agencia, fecha_inicio, fecha_final, precio_t, ciudad)"
+                +  "(id_reserva, fecha_inicio, fecha_final, precio_t, ciudad)"
                 +  "VALUES (?,?,?,?,?)";    
         
          try{
@@ -54,5 +56,31 @@ public class ReservaDAO {
             }
         }
         return id;
+    }
+    
+    public List<ReservaDTO> reservaGeneralDAO (){
+        List<ReservaDTO> reserva = new ArrayList<>();
+        PreparedStatement consulta = null;
+        ResultSet resultSet = null;
+        String consultasSQL = "SELECT "
+                + "id_reserva, fecha_inicio, fecha_final, precio_t, ciudad "
+                + "FROM Reservas";
+        try {
+            consulta = conector.prepareStatement(consultasSQL);
+            resultSet = consulta.executeQuery();
+            
+            while(resultSet.next()){
+                ReservaDTO unareserva = new ReservaDTO();
+                unareserva.setId_reserva(resultSet.getInt(1));
+                unareserva.setFecha_inicio(resultSet.getString(2));
+                unareserva.setFecha_final(resultSet.getString(3));
+                unareserva.setPrecio_t(resultSet.getFloat(4));
+                unareserva.setCiudad(resultSet.getString(5));                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(VehiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return reserva;
     }
 }

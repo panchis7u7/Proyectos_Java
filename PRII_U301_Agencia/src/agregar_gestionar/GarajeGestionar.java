@@ -5,6 +5,9 @@
  */
 package agregar_gestionar;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Katherine Arzate
@@ -42,6 +45,11 @@ public class GarajeGestionar extends javax.swing.JPanel {
         btnBorrar = new javax.swing.JButton();
 
         btnRefrescar.setText("Refrescar");
+        btnRefrescar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefrescarActionPerformed(evt);
+            }
+        });
 
         tblGarajes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -64,6 +72,7 @@ public class GarajeGestionar extends javax.swing.JPanel {
 
         jLabel4.setText("Telefono:");
 
+        tfIdGaraje.setEditable(false);
         tfIdGaraje.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfIdGarajeActionPerformed(evt);
@@ -97,13 +106,10 @@ public class GarajeGestionar extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(315, 315, 315)
-                        .addComponent(btnRefrescar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnRefrescar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25))
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
@@ -180,6 +186,10 @@ public class GarajeGestionar extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfTelefonoActionPerformed
 
+    private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
+        refrescar();
+    }//GEN-LAST:event_btnRefrescarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
@@ -196,4 +206,35 @@ public class GarajeGestionar extends javax.swing.JPanel {
     private javax.swing.JTextField tfIdGaraje;
     private javax.swing.JTextField tfTelefono;
     // End of variables declaration//GEN-END:variables
+
+    
+    private void refrescar() {
+        Conector cone = new Conector();
+        
+        GarajeDAO garajeDAO = new GarajeDAO(cone.miconector);
+        List <GarajeDTO> garajes = garajeDAO.garajeGeneralDAO();
+        
+        DefaultTableModel modeloTabla = new DefaultTableModel();
+        tblGarajes.setModel(modeloTabla);
+        
+        modeloTabla.addColumn("ID");
+        modeloTabla.addColumn("Direccion");
+        modeloTabla.addColumn("Ciudad");
+        modeloTabla.addColumn("Telefono");
+        
+        Object[] columna = new Object[4];
+        
+        int objGuardados = garajes.size();
+        
+        for (int i = 0; i < objGuardados; i++) {
+            columna[0] = garajes.get(i).getId_garaje();
+            columna[1] = garajes.get(i).getDireccion();
+            columna[2] = garajes.get(i).getCiudad();
+            columna[3] = garajes.get(i).getTelefono();
+            modeloTabla.addRow(columna);
+        }
+        cone.cerrar();
+    }
+
+
 }

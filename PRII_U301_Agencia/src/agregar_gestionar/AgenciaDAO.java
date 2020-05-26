@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author Katherine Arzate
@@ -53,5 +55,31 @@ public class AgenciaDAO {
             }
         }
         return id;
+    }
+    
+    
+    public List<AgenciaDTO> agenciaGeneralDAO (){
+        List<AgenciaDTO> agencia = new ArrayList<>();
+        PreparedStatement consulta = null;
+        ResultSet resultSet = null;
+        String consultasSQL = "SELECT "
+                + "id_agencia, nombre, ciudad, telefono "
+                + "FROM Agencias";
+        try {
+            consulta = conector.prepareStatement(consultasSQL);
+            resultSet = consulta.executeQuery();
+            
+            while(resultSet.next()){
+                AgenciaDTO unagencia = new AgenciaDTO();
+                unagencia.setId_agencia(resultSet.getInt(1));
+                unagencia.setNombre(resultSet.getString(2));
+                unagencia.setCiudad(resultSet.getString(3));
+                unagencia.setTelefono(resultSet.getString(4));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(VehiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return agencia;
     }
 }

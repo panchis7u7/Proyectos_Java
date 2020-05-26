@@ -181,6 +181,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Refrescar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRefrescarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -228,6 +231,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfIdCliente">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfNombre">
     </Component>

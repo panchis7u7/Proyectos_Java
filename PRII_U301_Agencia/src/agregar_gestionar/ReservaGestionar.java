@@ -5,6 +5,9 @@
  */
 package agregar_gestionar;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Katherine Arzate
@@ -44,6 +47,11 @@ public class ReservaGestionar extends javax.swing.JPanel {
         btnBorrar = new javax.swing.JButton();
 
         btnRefrescar.setText("Refrescar");
+        btnRefrescar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefrescarActionPerformed(evt);
+            }
+        });
 
         tblReservas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -53,9 +61,14 @@ public class ReservaGestionar extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Fecha inicial", "Fecha Final", "Precio ", "Ciudad"
+                "ID", "Fecha inicial", "Fecha final", "Precio ", "Ciudad"
             }
         ));
+        tblReservas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblReservasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblReservas);
         if (tblReservas.getColumnModel().getColumnCount() > 0) {
             tblReservas.getColumnModel().getColumn(0).setPreferredWidth(3);
@@ -71,6 +84,7 @@ public class ReservaGestionar extends javax.swing.JPanel {
 
         jLabel5.setText("Ciudad:");
 
+        tfIdReserva.setEditable(false);
         tfIdReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfIdReservaActionPerformed(evt);
@@ -204,6 +218,14 @@ public class ReservaGestionar extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBorrarActionPerformed
 
+    private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
+        refrescar();
+    }//GEN-LAST:event_btnRefrescarActionPerformed
+
+    private void tblReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblReservasMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblReservasMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
@@ -222,4 +244,34 @@ public class ReservaGestionar extends javax.swing.JPanel {
     private javax.swing.JTextField tfIdReserva;
     private javax.swing.JTextField tfPrecio;
     // End of variables declaration//GEN-END:variables
+
+    private void refrescar() {
+        Conector cone = new Conector();
+        
+        ReservaDAO reservaDAO = new ReservaDAO(cone.miconector);
+        List <ReservaDTO> reservas = reservaDAO.reservaGeneralDAO();
+        
+        DefaultTableModel modeloTabla = new DefaultTableModel();
+        tblReservas.setModel(modeloTabla);
+        
+        modeloTabla.addColumn("ID");
+        modeloTabla.addColumn("Fecha inicial");
+        modeloTabla.addColumn("Fecha final");
+        modeloTabla.addColumn("Precio");
+        modeloTabla.addColumn("Ciudad");
+        
+        Object[] columna = new Object[5];
+        
+        int objGuardados = reservas.size();
+        
+        for (int i = 0; i < objGuardados; i++) {
+            columna[0] = reservas.get(i).getId_reserva();
+            columna[1] = reservas.get(i).getFecha_inicio();
+            columna[2] = reservas.get(i).getFecha_final();
+            columna[3] = reservas.get(i).getPrecio_t();
+            columna[4] = reservas.get(i).getCiudad();
+            modeloTabla.addRow(columna);
+        }
+        cone.cerrar();
+    }
 }

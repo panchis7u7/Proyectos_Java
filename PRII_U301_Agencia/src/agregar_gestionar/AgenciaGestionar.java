@@ -5,6 +5,9 @@
  */
 package agregar_gestionar;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Katherine Arzate
@@ -42,6 +45,11 @@ public class AgenciaGestionar extends javax.swing.JPanel {
         btnBorrar = new javax.swing.JButton();
 
         btnRefrescar.setText("Refrescar");
+        btnRefrescar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefrescarActionPerformed(evt);
+            }
+        });
 
         tblAgencias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -63,6 +71,8 @@ public class AgenciaGestionar extends javax.swing.JPanel {
         jLabel3.setText("Ciudad:");
 
         jLabel4.setText("Telefono:");
+
+        tfIdAgencia.setEditable(false);
 
         btnActualizar.setText("Actualizar");
 
@@ -143,6 +153,10 @@ public class AgenciaGestionar extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBorrarActionPerformed
 
+    private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
+        refrescar();
+    }//GEN-LAST:event_btnRefrescarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
@@ -159,4 +173,32 @@ public class AgenciaGestionar extends javax.swing.JPanel {
     private javax.swing.JTextField tfNombre;
     private javax.swing.JTextField tfTelefono;
     // End of variables declaration//GEN-END:variables
+
+    private void refrescar() {
+        Conector cone = new Conector();
+        
+        AgenciaDAO agenciaDAO = new AgenciaDAO(cone.miconector);
+        List <AgenciaDTO> agencias = agenciaDAO.agenciaGeneralDAO();
+        
+        DefaultTableModel modeloTabla = new DefaultTableModel();
+        tblAgencias.setModel(modeloTabla);
+        
+        modeloTabla.addColumn("ID");
+        modeloTabla.addColumn("Nombre");
+        modeloTabla.addColumn("Ciudad");
+        modeloTabla.addColumn("Telefono");
+        
+        Object[] columna = new Object[4];
+        
+        int objGuardados = agencias.size();
+        
+        for (int i = 0; i < objGuardados; i++) {
+            columna[0] = agencias.get(i).getId_agencia();
+            columna[1] = agencias.get(i).getNombre();
+            columna[2] = agencias.get(i).getCiudad();
+            columna[3] = agencias.get(i).getTelefono();
+            modeloTabla.addRow(columna);
+        }
+        cone.cerrar();
+    }
 }

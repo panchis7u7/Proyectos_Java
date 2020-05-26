@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author Katherine Arzate
@@ -53,5 +55,31 @@ public class GarajeDAO {
             }
         }
         return id;
+    }
+    
+    
+    public List<GarajeDTO> garajeGeneralDAO (){
+        List<GarajeDTO> garaje = new ArrayList<>();
+        PreparedStatement consulta = null;
+        ResultSet resultSet = null;
+        String consultasSQL = "SELECT "
+                + "id_garaje, direccion, ciudad, telefono "
+                + "FROM Garajes";
+        try {
+            consulta = conector.prepareStatement(consultasSQL);
+            resultSet = consulta.executeQuery();
+            
+            while(resultSet.next()){
+                GarajeDTO ungaraje = new GarajeDTO();
+                ungaraje.setId_garaje(resultSet.getInt(1));
+                ungaraje.setDireccion(resultSet.getString(2));
+                ungaraje.setCiudad(resultSet.getString(3));
+                ungaraje.setTelefono(resultSet.getString(4));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(VehiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return garaje;
     }
 }

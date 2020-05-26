@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author Katherine Arzate
@@ -55,5 +57,33 @@ public class ClienteDAO {
             }
         }
         return id;
+    }
+    
+    public List<ClienteDTO> clienteGeneralDAO (){
+        List<ClienteDTO> cliente = new ArrayList<>();
+        PreparedStatement consulta = null;
+        ResultSet resultSet = null;
+        String consultasSQL = "SELECT "
+                + "id_cliente, nombre, apellidos, direccion, telefono, correo, ciudad "
+                + "FROM Clientes";
+        try {
+            consulta = conector.prepareStatement(consultasSQL);
+            resultSet = consulta.executeQuery();
+            
+            while(resultSet.next()){
+                ClienteDTO uncliente = new ClienteDTO();
+                uncliente.setId_cliente(resultSet.getInt(1));
+                uncliente.setNombre(resultSet.getString(2));
+                uncliente.setApellidos(resultSet.getString(3));
+                uncliente.setDireccion(resultSet.getString(4));
+                uncliente.setTelefono(resultSet.getString(5));
+                uncliente.setCorreo(resultSet.getString(6));
+                uncliente.setCiudad(resultSet.getString(7));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(VehiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cliente;
     }
 }

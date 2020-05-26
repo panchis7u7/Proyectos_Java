@@ -5,6 +5,10 @@
  */
 package agregar_gestionar;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Katherine Arzate
@@ -50,6 +54,11 @@ public class VehiculoGestionar extends javax.swing.JPanel {
         btnBorrar = new javax.swing.JButton();
 
         btnRefrescar.setText("Refrescar");
+        btnRefrescar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefrescarActionPerformed(evt);
+            }
+        });
 
         tblVehiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -62,6 +71,11 @@ public class VehiculoGestionar extends javax.swing.JPanel {
                 "ID", "Matricula", "Tipo", "Marca", "Modelo", "Fabricado", "Costo", "Carga"
             }
         ));
+        tblVehiculos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblVehiculosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblVehiculos);
         if (tblVehiculos.getColumnModel().getColumnCount() > 0) {
             tblVehiculos.getColumnModel().getColumn(7).setResizable(false);
@@ -83,6 +97,8 @@ public class VehiculoGestionar extends javax.swing.JPanel {
 
         jLabel8.setText("Carga:");
 
+        tfIdVehiculo.setEditable(false);
+
         tfCarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfCargaActionPerformed(evt);
@@ -97,6 +113,11 @@ public class VehiculoGestionar extends javax.swing.JPanel {
         });
 
         btnBorrar.setText("Borrar");
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -184,8 +205,78 @@ public class VehiculoGestionar extends javax.swing.JPanel {
     }//GEN-LAST:event_tfCargaActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // TODO add your handling code here:
+        VehiculoDTO vehiculo = new VehiculoDTO();
+        vehiculo.setId_vehiculo(Integer.parseInt(tfIdVehiculo.getText()));
+        vehiculo.setMatricula(tfMatricula.getText());
+        vehiculo.setTipo(tfTipo.getText());
+        vehiculo.setMarca(tfMarca.getText());
+        vehiculo.setModelo(tfModelo.getText());
+        vehiculo.setFabrica(tfFabrica.getText());
+        vehiculo.setCosto(Float.parseFloat(tfFabrica.getText()));
+        vehiculo.setCarga(Integer.parseInt(tfCarga.getText()));
+        
+        int resp = JOptionPane.showConfirmDialog(null, "¿Deseas modificarlo?",
+                    "Confirmar actualizacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(resp == 0){
+            Conector cone = new Conector();
+            VehiculoDAO vehiculoDAO = new VehiculoDAO(cone.miconector);
+            int resultado = vehiculoDAO.actualizarVehiculo(vehiculo);
+            
+            if(resultado > 0){
+                JOptionPane.showMessageDialog(null, "Actualizacion exitosa");
+                refrescar();
+            }else
+                JOptionPane.showMessageDialog(null, "Actualizacion erronea");
+            cone.cerrar();
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
+        refrescar();
+    }//GEN-LAST:event_btnRefrescarActionPerformed
+
+    private void tblVehiculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVehiculosMouseClicked
+        int r = tblVehiculos.getSelectedRow();
+        int id = (int) tblVehiculos.getValueAt(r, 0);
+        String matricula = (String) tblVehiculos.getValueAt(r, 1);
+        String tipo = (String) tblVehiculos.getValueAt(r, 2);
+        String marca = (String) tblVehiculos.getValueAt(r, 3);
+        String modelo = (String) tblVehiculos.getValueAt(r, 4);
+        String fabrica = (String) tblVehiculos.getValueAt(r, 5);
+        float costo = (float) tblVehiculos.getValueAt(r, 6);
+        int carga = (int) tblVehiculos.getValueAt(r, 7);
+        
+        tfIdVehiculo.setText(""+id);
+        tfMatricula.setText(matricula);
+        tfTipo.setText(tipo);
+        tfMarca.setText(marca);
+        tfModelo.setText(modelo);
+        tfFabrica.setText(fabrica);
+        tfCosto.setText(""+costo);
+        tfCarga.setText(""+carga);
+    }//GEN-LAST:event_tblVehiculosMouseClicked
+
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+        VehiculoDTO vehiculo = new VehiculoDTO();
+        vehiculo.setId_vehiculo(Integer.parseInt(tfIdVehiculo.getText()));
+        
+        int resp = JOptionPane.showConfirmDialog(null, "¿Realmente deseas eliminar?",
+                "Confirmar ELIMINACION", JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        
+        if(resp == 0){
+            Conector cone = new Conector();
+            VehiculoDAO vehiculoDAO =new VehiculoDAO(cone.miconector);
+            int resultado = vehiculoDAO.borrarVehiculo(vehiculo);
+            if(resultado > 0){
+                JOptionPane.showMessageDialog(null, "Eliminación exitosa");
+                refrescar();
+            }else
+                JOptionPane.showMessageDialog(null, "Eliminación errónea");
+            cone.cerrar();
+            
+        }
+    }//GEN-LAST:event_btnBorrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -211,4 +302,40 @@ public class VehiculoGestionar extends javax.swing.JPanel {
     private javax.swing.JTextField tfModelo;
     private javax.swing.JTextField tfTipo;
     // End of variables declaration//GEN-END:variables
+
+    private void refrescar() {
+        Conector cone = new Conector();
+        
+        VehiculoDAO vehiculoDAO = new VehiculoDAO(cone.miconector);
+        List <VehiculoDTO> vehiculos = vehiculoDAO.vehiculoGeneralDAO();
+        
+        DefaultTableModel modeloTabla = new DefaultTableModel();
+        tblVehiculos.setModel(modeloTabla);
+        
+        modeloTabla.addColumn("ID");
+        modeloTabla.addColumn("Matricula");
+        modeloTabla.addColumn("Tipo");
+        modeloTabla.addColumn("Marca");
+        modeloTabla.addColumn("Modelo");
+        modeloTabla.addColumn("Fabricado");
+        modeloTabla.addColumn("Costo");
+        modeloTabla.addColumn("Carga");
+        
+        Object[] columna = new Object[8];
+        
+        int objGuardados = vehiculos.size();
+        
+        for (int i = 0; i < objGuardados; i++) {
+            columna[0] = vehiculos.get(i).getId_vehiculo();
+            columna[1] = vehiculos.get(i).getMatricula();
+            columna[2] = vehiculos.get(i).getTipo();
+            columna[3] = vehiculos.get(i).getMarca();
+            columna[4] = vehiculos.get(i).getModelo();
+            columna[5] = vehiculos.get(i).getFabrica();
+            columna[6] = vehiculos.get(i).getCosto();
+            columna[7] = vehiculos.get(i).getCarga();
+            modeloTabla.addRow(columna);
+        }
+        cone.cerrar();
+    }
 }
