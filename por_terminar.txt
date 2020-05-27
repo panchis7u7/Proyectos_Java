@@ -6,7 +6,7 @@ RESERVAS
 - actualizar
 - borrar
 
-////////////////////////
+//////////////////////////
 
 terminado 
 - CLIENTES
