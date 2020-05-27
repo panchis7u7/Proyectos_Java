@@ -1,0 +1,9 @@
+Ponchos
+A Honda Accord 1 1 2009 25000
+C Dodge Dakota 10 1 2009 20000 1
+A Audi A3 7 7 2008 28000
+C Ford Lobo 31 5 2009 25000 2
+A Toyota Camry 23 10 2009 22000
+A Dodge Avenger 30 6 2008 18000
+
+
