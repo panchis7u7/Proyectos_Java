@@ -1,3 +1,4 @@
+FALTANTES:
 VEHICULO: 
 - actualizar 
 
@@ -5,7 +6,7 @@ RESERVAS
 - actualizar
 - borrar
 
-
+////////////////////////
 
 terminado 
 - CLIENTES
