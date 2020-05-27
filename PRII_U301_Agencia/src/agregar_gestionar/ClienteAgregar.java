@@ -195,9 +195,9 @@ public class ClienteAgregar extends javax.swing.JPanel {
         ClienteDAO clienteDAO = new ClienteDAO(conec.miconector);
         int id = clienteDAO.agregarCliente(cliente);
         if(id>0){
-            JOptionPane.showMessageDialog(null, "Inserción de libro exitosa");
+            JOptionPane.showMessageDialog(null, "Inserción exitosa");
         }else
-            JOptionPane.showMessageDialog(null, "Inserción de cliente fallida");
+            JOptionPane.showMessageDialog(null, "Inserción fallida");
         conec.cerrar();
     }//GEN-LAST:event_btnAgregarActionPerformed
 

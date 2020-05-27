@@ -102,9 +102,9 @@ public class AgenciaAgregar extends javax.swing.JPanel {
         AgenciaDAO AgenciaDAO = new AgenciaDAO(conec.miconector);
         int id = AgenciaDAO.agregarAgencia(agencia);
         if(id>0){
-            JOptionPane.showMessageDialog(null, "Inserción de libro exitosa");
+            JOptionPane.showMessageDialog(null, "Inserción exitosa");
         }else
-            JOptionPane.showMessageDialog(null, "Inserción de cliente fallida");
+            JOptionPane.showMessageDialog(null, "Inserción fallida");
         conec.cerrar();
     }//GEN-LAST:event_btnAgregarActionPerformed
 

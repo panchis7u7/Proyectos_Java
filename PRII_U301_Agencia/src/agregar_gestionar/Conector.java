@@ -16,19 +16,15 @@ import java.util.logging.Logger;
  */
 public class Conector {
     public Connection miconector = null;
-    String contrasena = "definir";
+    String contrasena = "";
  
     public Conector() {
         try{
-            Class.forName("com.mysql.cj.jdbc.Drive").newInstance();
-            String url = "jdbc:mysql://localhost:3307/Agencia";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/Agencia";
             miconector = DriverManager.getConnection(url, "root", contrasena);
             if(miconector != null)System.out.println(" Conexión exitosa! ");   
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Conector.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Conector.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
             Logger.getLogger(Conector.class.getName()).log(Level.SEVERE, null, ex);
         } catch(SQLException ex){
             Logger.getLogger(Conector.class.getName()).log(Level.SEVERE, null, ex);
@@ -43,5 +39,11 @@ public class Conector {
         }
             
         }
+    
+    
+    
+    
+    
+    
     
 }

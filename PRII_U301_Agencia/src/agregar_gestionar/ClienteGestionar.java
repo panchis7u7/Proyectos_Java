@@ -6,6 +6,7 @@
 package agregar_gestionar;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -61,6 +62,11 @@ public class ClienteGestionar extends javax.swing.JPanel {
                 "ID", "Nombre", "Apellidos", "Direccion", "Telefono", "Correo", "Ciudad"
             }
         ));
+        tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblClientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblClientes);
 
         btnRefrescar.setText("Refrescar");
@@ -83,8 +89,18 @@ public class ClienteGestionar extends javax.swing.JPanel {
         jLabel6.setText("Ciudad:");
 
         btnActualizar.setText("Actualizar ");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         btnBorrar.setText("Borrar ");
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Id del cleinte:");
 
@@ -214,6 +230,75 @@ public class ClienteGestionar extends javax.swing.JPanel {
         refrescar();
     }//GEN-LAST:event_btnRefrescarActionPerformed
 
+    private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
+        int r = tblClientes.getSelectedRow();
+        int id = (int) tblClientes.getValueAt(r, 0);
+        String nombre = (String) tblClientes.getValueAt(r, 1);
+        String apellidos = (String) tblClientes.getValueAt(r, 2);
+        String direccion = (String) tblClientes.getValueAt(r, 3);
+        String telefono = (String) tblClientes.getValueAt(r, 4);
+        String correo = (String) tblClientes.getValueAt(r, 5);
+        String ciudad = (String) tblClientes.getValueAt(r, 6);
+        
+        tfIdCliente.setText(""+id);
+        tfNombre.setText(nombre);
+        tfApellidos.setText(apellidos);
+        tfDireccion.setText(direccion);
+        tfTelefono.setText(telefono);
+        tfCorreo.setText(correo);
+        tfCiudad.setText(ciudad);
+    }//GEN-LAST:event_tblClientesMouseClicked
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        ClienteDTO cliente = new ClienteDTO();
+        cliente.setId_cliente(Integer.parseInt(tfIdCliente.getText()));
+        cliente.setNombre(tfNombre.getText());
+        cliente.setApellidos(tfApellidos.getText());
+        cliente.setDireccion(tfDireccion.getText());
+        cliente.setTelefono(tfTelefono.getText());
+        cliente.setCorreo(tfCorreo.getText());
+        cliente.setCiudad(tfCiudad.getText());
+        
+        int resp = JOptionPane.showConfirmDialog(null, "¿Deseas modificarlo?",
+                    "Confirmar actualizacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(resp == 0){
+            Conector cone = new Conector();
+            ClienteDAO clienteDAO = new ClienteDAO(cone.miconector);
+            int resultado = clienteDAO.actualizarCliente(cliente);
+            
+            if(resultado > 0){
+                JOptionPane.showMessageDialog(null, "Actualizacion exitosa");
+                refrescar();
+            }else
+                JOptionPane.showMessageDialog(null, "Actualizacion erronea");
+            cone.cerrar();
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+        ClienteDTO cliente = new ClienteDTO();
+        cliente.setId_cliente(Integer.parseInt(tfIdCliente.getText()));
+        
+        int resp = JOptionPane.showConfirmDialog(null, "¿Realmente deseas eliminar?",
+                "Confirmar ELIMINACION", JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        
+        if(resp == 0){
+            Conector cone = new Conector();
+            ClienteDAO clienteDAO =new ClienteDAO(cone.miconector);
+            int resultado = clienteDAO.borrarCliente(cliente);
+            if(resultado > 0){
+                JOptionPane.showMessageDialog(null, "Eliminación exitosa");
+                refrescar();
+            }else
+                JOptionPane.showMessageDialog(null, "Eliminación errónea");
+            cone.cerrar();
+            
+        }
+
+    }//GEN-LAST:event_btnBorrarActionPerformed
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;

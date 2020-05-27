@@ -51,7 +51,7 @@ public class VehiculoAgregar extends javax.swing.JPanel {
         rbNocarga = new javax.swing.JRadioButton();
         rb1Carga = new javax.swing.JRadioButton();
         rb2Carga = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
 
         jLabel1.setText("Matricula:");
 
@@ -61,11 +61,18 @@ public class VehiculoAgregar extends javax.swing.JPanel {
 
         jLabel4.setText("Modelo:");
 
-        jLabel5.setText("Fabrica:");
+        jLabel5.setText("Fabricado:");
 
         jLabel6.setText("Costo:");
 
         jLabel7.setText("Carga:");
+
+        tfFabrica.setText("yyyy-MM-dd");
+        tfFabrica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfFabricaActionPerformed(evt);
+            }
+        });
 
         tfCosto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,10 +101,10 @@ public class VehiculoAgregar extends javax.swing.JPanel {
         btngCarga.add(rb2Carga);
         rb2Carga.setText("2");
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
 
@@ -108,7 +115,7 @@ public class VehiculoAgregar extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -133,7 +140,7 @@ public class VehiculoAgregar extends javax.swing.JPanel {
                             .addComponent(tfMarca, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
                             .addComponent(tfMatricula)
                             .addComponent(cbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,7 +176,7 @@ public class VehiculoAgregar extends javax.swing.JPanel {
                     .addComponent(rb1Carga)
                     .addComponent(rb2Carga))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(29, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -182,14 +189,14 @@ public class VehiculoAgregar extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_rbNocargaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         VehiculoDTO vehiculo = new VehiculoDTO();
         vehiculo.setMatricula(tfMatricula.getText());
         switch(cbTipo.getSelectedIndex()){
-            case 0: vehiculo.setTipo("Camioneta"); break;
-            case 1: vehiculo.setTipo("Automovil"); break;
+            case 0: vehiculo.setTipo("Automovil"); break;
+            case 1: vehiculo.setTipo("Camioneta"); break;
         }
-        vehiculo.setMarca(tfModelo.getText());
+        vehiculo.setMarca(tfMarca.getText());
         vehiculo.setModelo(tfModelo.getText());
         vehiculo.setFabrica(tfFabrica.getText());
         vehiculo.setCosto(Float.parseFloat(tfCosto.getText()));
@@ -205,21 +212,25 @@ public class VehiculoAgregar extends javax.swing.JPanel {
         VehiculoDAO vehiculoDAO = new VehiculoDAO(conec.miconector);
         int id = vehiculoDAO.agregarVehiculo(vehiculo);
         if(id>0){
-            JOptionPane.showMessageDialog(null, "Inserción de libro exitosa");
+            JOptionPane.showMessageDialog(null, "Inserción exitosa");
         }else
-            JOptionPane.showMessageDialog(null, "Inserción de cliente fallida");
+            JOptionPane.showMessageDialog(null, "Inserción fallida");
         conec.cerrar();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
 
     }//GEN-LAST:event_cbTipoActionPerformed
 
+    private void tfFabricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfFabricaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfFabricaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
     private javax.swing.ButtonGroup btngCarga;
     private javax.swing.JComboBox<String> cbTipo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

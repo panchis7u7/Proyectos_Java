@@ -79,11 +79,68 @@ public class ClienteDAO {
                 uncliente.setTelefono(resultSet.getString(5));
                 uncliente.setCorreo(resultSet.getString(6));
                 uncliente.setCiudad(resultSet.getString(7));
+                cliente.add(uncliente);
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(VehiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return cliente;
+    }
+    
+    
+    public int actualizarCliente(ClienteDTO nuevoCliente){
+        PreparedStatement sentenciaSql = null;
+        int resultado = 0;
+        String sql = "UPDATE Clientes SET "
+                + "nombre=?, apellidos=?, direccion=?, telefono=?, correo=?, ciudad=? "
+                + "WHERE id_cliente=?";
+        try {
+            conector.setAutoCommit(false);
+            sentenciaSql = conector.prepareStatement(sql);
+            sentenciaSql.setString(1, nuevoCliente.getNombre());
+            sentenciaSql.setString(2, nuevoCliente.getApellidos());
+            sentenciaSql.setString(3, nuevoCliente.getDireccion());
+            sentenciaSql.setString(4, nuevoCliente.getTelefono());
+            sentenciaSql.setString(5, nuevoCliente.getCorreo());
+            sentenciaSql.setString(6, nuevoCliente.getCiudad());
+            sentenciaSql.setInt(7, nuevoCliente.getId_cliente());
+            
+            sentenciaSql.executeUpdate();
+            conector.commit();
+            resultado = nuevoCliente.getId_cliente();
+        } catch (SQLException ex) {
+            resultado = 0;
+            ex.printStackTrace();
+            try {
+                conector.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Error de rollback");
+            }
+        }
+        return resultado;
+    }
+    
+    public int borrarCliente(ClienteDTO cliente){
+        PreparedStatement sentenciaSql = null;
+        int resultado = 0;
+        String sql = "DELETE FROM Clientes WHERE id_cliente=?";
+        try {
+            conector.setAutoCommit(false);
+            sentenciaSql = conector.prepareStatement(sql);
+            sentenciaSql.setInt(1, cliente.getId_cliente());
+            sentenciaSql.executeUpdate();
+            conector.commit();
+            resultado = cliente.getId_cliente();
+        } catch (SQLException ex) {
+            resultado = 0;
+            ex.printStackTrace();
+            try {
+                conector.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Error de rollback");
+            }
+        }
+        return resultado;
     }
 }

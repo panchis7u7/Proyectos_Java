@@ -97,7 +97,7 @@ public class ReservaAgregar extends javax.swing.JPanel {
                     .addComponent(tfCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -113,9 +113,9 @@ public class ReservaAgregar extends javax.swing.JPanel {
         ReservaDAO reservaDAO = new ReservaDAO(conec.miconector);
         int id = reservaDAO.agregarReserva(reserva);
         if(id>0){
-            JOptionPane.showMessageDialog(null, "Inserción de libro exitosa");
+            JOptionPane.showMessageDialog(null, "Inserción exitosa");
         }else
-            JOptionPane.showMessageDialog(null, "Inserción de cliente fallida");
+            JOptionPane.showMessageDialog(null, "Inserción fallida");
         conec.cerrar();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
