@@ -84,6 +84,7 @@ public class VehiculoDAO {
                 unvehiculo.setFabrica(resultSet.getString(6));
                 unvehiculo.setCosto(resultSet.getFloat(7));
                 unvehiculo.setCarga(resultSet.getInt(8));
+                vehiculo.add(unvehiculo);
             }
             
         } catch (SQLException ex) {
@@ -98,7 +99,7 @@ public class VehiculoDAO {
         int resultado = 0;
         String sql = "UPDATE Vehiculos SET "
                 + "matricula=?, tipo=?, marca=?, modelo=?, fabrica=?, costo=?, carga=? "
-                + "WHERE id_vehiculos=?";
+                + "WHERE id_vehiculo=?";
         try {
             conector.setAutoCommit(false);
             sentenciaSql = conector.prepareStatement(sql);
@@ -109,6 +110,8 @@ public class VehiculoDAO {
             sentenciaSql.setString(5, nuevoVehiculo.getFabrica());
             sentenciaSql.setFloat(6, nuevoVehiculo.getCosto());
             sentenciaSql.setInt(7, nuevoVehiculo.getCarga());
+            sentenciaSql.setInt(8, nuevoVehiculo.getId_vehiculo());
+            
             sentenciaSql.executeUpdate();
             conector.commit();
             resultado = nuevoVehiculo.getId_vehiculo();
@@ -127,7 +130,7 @@ public class VehiculoDAO {
     public int borrarVehiculo(VehiculoDTO vehiculo){
         PreparedStatement sentenciaSql = null;
         int resultado = 0;
-        String sql = "DELETE FROM Vehiculos WHERE id_vehiculos=?";
+        String sql = "DELETE FROM Vehiculos WHERE id_vehiculo=?";
         try {
             conector.setAutoCommit(false);
             sentenciaSql = conector.prepareStatement(sql);

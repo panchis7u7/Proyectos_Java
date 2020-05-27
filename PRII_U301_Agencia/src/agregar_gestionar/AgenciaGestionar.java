@@ -6,6 +6,7 @@
 package agregar_gestionar;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -62,6 +63,11 @@ public class AgenciaGestionar extends javax.swing.JPanel {
                 "Id ", "Nombre", "Ciudad", "Telefono"
             }
         ));
+        tblAgencias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAgenciasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblAgencias);
 
         jLabel1.setText("ID de la agencia:");
@@ -75,6 +81,11 @@ public class AgenciaGestionar extends javax.swing.JPanel {
         tfIdAgencia.setEditable(false);
 
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         btnBorrar.setText("Borrar");
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -124,8 +135,8 @@ public class AgenciaGestionar extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addComponent(btnRefrescar)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(tfIdAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -150,12 +161,66 @@ public class AgenciaGestionar extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        // TODO add your handling code here:
+        AgenciaDTO agencia = new AgenciaDTO();
+        agencia.setId_agencia(Integer.parseInt(tfIdAgencia.getText()));
+        
+        int resp = JOptionPane.showConfirmDialog(null, "¿Realmente deseas eliminar?",
+                "Confirmar ELIMINACION", JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        
+        if(resp == 0){
+            Conector cone = new Conector();
+            AgenciaDAO agenciaDAO =new AgenciaDAO(cone.miconector);
+            int resultado = agenciaDAO.borrarAgencia(agencia);
+            if(resultado > 0){
+                JOptionPane.showMessageDialog(null, "Eliminación exitosa");
+                refrescar();
+            }else
+                JOptionPane.showMessageDialog(null, "Eliminación errónea");
+            cone.cerrar();
+            
+        }
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
         refrescar();
     }//GEN-LAST:event_btnRefrescarActionPerformed
+
+    private void tblAgenciasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAgenciasMouseClicked
+        int r = tblAgencias.getSelectedRow();
+        int id = (int) tblAgencias.getValueAt(r, 0);
+        String nombre = (String) tblAgencias.getValueAt(r, 1);
+        String ciudad = (String) tblAgencias.getValueAt(r, 2);
+        String telefono = (String) tblAgencias.getValueAt(r, 3);
+        
+        tfIdAgencia.setText(""+id);
+        tfNombre.setText(nombre);
+        tfCiudad.setText(ciudad);
+        tfTelefono.setText(telefono);
+    }//GEN-LAST:event_tblAgenciasMouseClicked
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        AgenciaDTO agencia = new AgenciaDTO();
+        agencia.setId_agencia(Integer.parseInt(tfIdAgencia.getText()));
+        agencia.setNombre(tfNombre.getText());
+        agencia.setCiudad(tfCiudad.getText());
+        agencia.setTelefono(tfTelefono.getText());
+        
+        int resp = JOptionPane.showConfirmDialog(null, "¿Deseas modificarlo?",
+                    "Confirmar actualizacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(resp == 0){
+            Conector cone = new Conector();
+            AgenciaDAO agenciaDAO = new AgenciaDAO(cone.miconector);
+            int resultado = agenciaDAO.actualizarAgencia(agencia);
+            
+            if(resultado > 0){
+                JOptionPane.showMessageDialog(null, "Actualizacion exitosa");
+                refrescar();
+            }else
+                JOptionPane.showMessageDialog(null, "Actualizacion erronea");
+            cone.cerrar();
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

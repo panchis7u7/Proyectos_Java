@@ -1,0 +1,13 @@
+VEHICULO: 
+- actualizar 
+
+RESERVAS
+- actualizar
+- borrar
+
+
+
+terminado 
+- CLIENTES
+- AGENCIAS
+- GARAJES

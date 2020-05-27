@@ -102,9 +102,9 @@ public class GarajeAgregar extends javax.swing.JPanel {
         GarajeDAO garajeDAO = new GarajeDAO(conec.miconector);
         int id = garajeDAO.agregarGaraje(garaje);
         if(id>0){
-            JOptionPane.showMessageDialog(null, "Inserción de libro exitosa");
+            JOptionPane.showMessageDialog(null, "Inserción de garaje exitosa");
         }else
-            JOptionPane.showMessageDialog(null, "Inserción de cliente fallida");
+            JOptionPane.showMessageDialog(null, "Inserción de garaje fallida");
         conec.cerrar();
     }//GEN-LAST:event_btnAgregarActionPerformed
 

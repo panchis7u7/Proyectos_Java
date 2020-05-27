@@ -6,6 +6,7 @@
 package agregar_gestionar;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -116,6 +117,11 @@ public class ReservaGestionar extends javax.swing.JPanel {
         });
 
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         btnBorrar.setText("Borrar");
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -223,8 +229,42 @@ public class ReservaGestionar extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRefrescarActionPerformed
 
     private void tblReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblReservasMouseClicked
-        // TODO add your handling code here:
+        int r = tblReservas.getSelectedRow();
+        int id = (int) tblReservas.getValueAt(r, 0);
+        String finicio = (String) tblReservas.getValueAt(r, 1);
+        String ffinal = (String) tblReservas.getValueAt(r, 2);
+        float precio = (float) tblReservas.getValueAt(r, 3);
+        String ciudad = (String) tblReservas.getValueAt(r, 4);
+        
+        tfIdReserva.setText(""+id);
+        tfFechaInicio.setText(finicio);
+        tfFechaFinal.setText(ffinal);
+        tfPrecio.setText(""+precio);
+        tfCiudad.setText(ciudad);
     }//GEN-LAST:event_tblReservasMouseClicked
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        ReservaDTO reserva = new ReservaDTO();
+        reserva.setId_reserva(Integer.parseInt(tfIdReserva.getText()));
+        reserva.setFecha_inicio(tfFechaInicio.getText());
+        reserva.setFecha_final(tfFechaFinal.getText());
+        reserva.setPrecio_t(Float.parseFloat(tfPrecio.getText()));
+        reserva.setCiudad(tfCiudad.getText());
+        
+        int resp = JOptionPane.showConfirmDialog(null, "¿Deseas modificarlo?",
+                    "Confirmar actualizacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(resp == 0){
+            Conector cone = new Conector();
+            ReservaDAO reservaDAO = new ReservaDAO(cone.miconector);
+            int resultado = reservaDAO.actualizarReserva(reserva);
+            
+            if(resultado > 0){
+                JOptionPane.showMessageDialog(null, "Actualizacion exitosa");
+                refrescar();
+            }else
+                JOptionPane.showMessageDialog(null, "Actualizacion erronea");
+            cone.cerrar();
+        }    }//GEN-LAST:event_btnActualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

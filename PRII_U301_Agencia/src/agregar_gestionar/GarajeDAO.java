@@ -75,11 +75,66 @@ public class GarajeDAO {
                 ungaraje.setDireccion(resultSet.getString(2));
                 ungaraje.setCiudad(resultSet.getString(3));
                 ungaraje.setTelefono(resultSet.getString(4));
+                garaje.add(ungaraje);
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(VehiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GarajeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return garaje;
     }
+    
+    
+    public int actualizarGaraje(GarajeDTO nuevoGaraje){
+        PreparedStatement sentenciaSql = null;
+        int resultado = 0;
+        String sql = "UPDATE Garajes SET "
+                + "direccion=?, ciudad=?, telefono=? "
+                + "WHERE id_garaje=?";
+        try {
+            conector.setAutoCommit(false);
+            sentenciaSql = conector.prepareStatement(sql);
+            sentenciaSql.setString(1, nuevoGaraje.getDireccion());
+            sentenciaSql.setString(2, nuevoGaraje.getCiudad());
+            sentenciaSql.setString(3, nuevoGaraje.getTelefono());
+            sentenciaSql.setInt(4, nuevoGaraje.getId_garaje());
+            
+            sentenciaSql.executeUpdate();
+            conector.commit();
+            resultado = nuevoGaraje.getId_garaje();
+        } catch (SQLException ex) {
+            resultado = 0;
+            ex.printStackTrace();
+            try {
+                conector.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Error de rollback");
+            }
+        }
+        return resultado;
+    }
+    
+    public int borrarGaraje(GarajeDTO garaje){
+        PreparedStatement sentenciaSql = null;
+        int resultado = 0;
+        String sql = "DELETE FROM Garajes WHERE id_garaje=?";
+        try {
+            conector.setAutoCommit(false);
+            sentenciaSql = conector.prepareStatement(sql);
+            sentenciaSql.setInt(1, garaje.getId_garaje());
+            sentenciaSql.executeUpdate();
+            conector.commit();
+            resultado = garaje.getId_garaje();
+        } catch (SQLException ex) {
+            resultado = 0;
+            ex.printStackTrace();
+            try {
+                conector.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Error de rollback");
+            }
+        }
+        return resultado;
+    }
+
 }

@@ -6,6 +6,7 @@
 package agregar_gestionar;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -62,6 +63,11 @@ public class GarajeGestionar extends javax.swing.JPanel {
                 "ID", "Direccion", "Ciudad", "Telefono"
             }
         ));
+        tblGarajes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblGarajesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblGarajes);
 
         jLabel1.setText("ID del garaje:");
@@ -98,8 +104,18 @@ public class GarajeGestionar extends javax.swing.JPanel {
         });
 
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         btnBorrar.setText("Borrar");
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -145,8 +161,8 @@ public class GarajeGestionar extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(btnRefrescar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(tfIdGaraje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -189,6 +205,63 @@ public class GarajeGestionar extends javax.swing.JPanel {
     private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
         refrescar();
     }//GEN-LAST:event_btnRefrescarActionPerformed
+
+    private void tblGarajesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGarajesMouseClicked
+        int r = tblGarajes.getSelectedRow();
+        int id = (int) tblGarajes.getValueAt(r, 0);
+        String direccion = (String) tblGarajes.getValueAt(r, 1);
+        String ciudad = (String) tblGarajes.getValueAt(r, 2);
+        String telefono = (String) tblGarajes.getValueAt(r, 3);
+        
+        tfIdGaraje.setText(""+id);
+        tfDireccion.setText(direccion);
+        tfCiudad.setText(ciudad);
+        tfTelefono.setText(telefono);
+        
+    }//GEN-LAST:event_tblGarajesMouseClicked
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        GarajeDTO garaje = new GarajeDTO();
+        garaje.setId_garaje(Integer.parseInt(tfIdGaraje.getText()));
+        garaje.setDireccion(tfDireccion.getText());
+        garaje.setTelefono(tfTelefono.getText());
+        garaje.setCiudad(tfCiudad.getText());
+        
+        int resp = JOptionPane.showConfirmDialog(null, "¿Deseas modificarlo?",
+                    "Confirmar actualizacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(resp == 0){
+            Conector cone = new Conector();
+            GarajeDAO garajeDAO = new GarajeDAO(cone.miconector);
+            int resultado = garajeDAO.actualizarGaraje(garaje);
+            
+            if(resultado > 0){
+                JOptionPane.showMessageDialog(null, "Actualizacion exitosa");
+                refrescar();
+            }else
+                JOptionPane.showMessageDialog(null, "Actualizacion erronea");
+            cone.cerrar();
+        }    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+        GarajeDTO garaje = new GarajeDTO();
+        garaje.setId_garaje(Integer.parseInt(tfIdGaraje.getText()));
+        
+        int resp = JOptionPane.showConfirmDialog(null, "¿Realmente deseas eliminar?",
+                "Confirmar ELIMINACION", JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        
+        if(resp == 0){
+            Conector cone = new Conector();
+            GarajeDAO garajeDAO =new GarajeDAO(cone.miconector);
+            int resultado = garajeDAO.borrarGaraje(garaje);
+            if(resultado > 0){
+                JOptionPane.showMessageDialog(null, "Eliminación exitosa");
+                refrescar();
+            }else
+                JOptionPane.showMessageDialog(null, "Eliminación errónea");
+            cone.cerrar();
+            
+        }    }//GEN-LAST:event_btnBorrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

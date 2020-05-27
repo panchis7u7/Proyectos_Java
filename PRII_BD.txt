@@ -57,7 +57,6 @@ CREATE TABLE ReservasAgencias (
 CREATE TABLE Involucra ( 
 	id_reserva INTEGER NOT NULL,
 	id_vehiculo INTEGER NOT NULL,
-	precio_alquiler DECIMAL(8,2) NOT NULL,
 	PRIMARY KEY (id_reserva, id_vehiculo),
 	FOREIGN KEY (id_reserva) REFERENCES Reservas(id_reserva) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (id_vehiculo) REFERENCES Vehiculos(id_vehiculo) ON UPDATE CASCADE ON DELETE CASCADE
@@ -78,9 +77,6 @@ CREATE TABLE Guardados (
 	FOREIGN KEY (id_vehiculo) REFERENCES Vehiculos(id_vehiculo) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-INSERTS
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 INSERT INTO Clientes VALUES
 	(1, 'Carlos Sebastian', 'Madrigal Rodríguez', 'Dalia 50', '4433501124', 'smadrigal@gmail.com', 'Morelia'),
@@ -98,20 +94,20 @@ INSERT INTO Clientes VALUES
 	(13, 'Italia Monserrat', 'Hernandez Vargas', 'Melon 229', '2221861595', 'itihv1120@gmail.com', 'Puebla');
 
 INSERT INTO Vehiculos VALUES 
-	(1, 'AGH1089', 'Automovil', 'Honda', 'Accord', '2012-01-01', 25000, null),
+	(1, 'AGH1089', 'Automovil', 'Honda', 'Accord', '2012-01-01', 25000, 0),
 	(2, 'RGW1273', 'Camioneta', 'Dodge', 'Dakota', '2010-01-10', 22000, 1),	
-	(3, 'PGA1751', 'Automovil', 'Audi', 'A3', '2009-07-07', 28000, null),
+	(3, 'PGA1751', 'Automovil', 'Audi', 'A3', '2009-07-07', 28000, 0),
 	(4, 'PGV1818', 'Camioneta', 'Ford', 'Lobo', '2009-05-31', 23000, 2),
-	(5, 'AGS9942', 'Automovil', 'Toyota', 'Camry', '2009-10-23', 22000, null),
-	(6, 'PGA4565', 'Automovil', 'Dodge', 'Avenger', '2007-06-30', 18000, null),
-	(7, 'ASG1032', 'Automovil', 'Ford', 'Fiesta', '2010-02-27', 15000, null),
-	(8, 'PGA2535', 'Automovil', 'Volkswagen', 'Pointer', '2015-07-13', 20000, null),
-	(9, 'PGA2586', 'Automovil', 'Volkswagen', 'Clasico', '2014-11-09', 23000, null),
-	(10, 'PGA1415', 'Automovil', 'Nissan', 'Sentra', '2013-12-11', 24000, null),
+	(5, 'AGS9942', 'Automovil', 'Toyota', 'Camry', '2009-10-23', 22000, 0),
+	(6, 'PGA4565', 'Automovil', 'Dodge', 'Avenger', '2007-06-30', 18000, 0),
+	(7, 'ASG1032', 'Automovil', 'Ford', 'Fiesta', '2010-02-27', 15000, 0),
+	(8, 'PGA2535', 'Automovil', 'Volkswagen', 'Pointer', '2015-07-13', 20000, 0),
+	(9, 'PGA2586', 'Automovil', 'Volkswagen', 'Clasico', '2014-11-09', 23000, 0),
+	(10, 'PGA1415', 'Automovil', 'Nissan', 'Sentra', '2013-12-11', 24000, 0),
 	(11, 'PGV1217', 'Camioneta', 'Nissan', 'Frontier', '2016-07-16', 30000, 1),
 	(12, 'PGV7896', 'Camioneta', 'Toyota', 'Hilux', '2015-08-10', 33000, 1),
-	(13, 'RWR8485', 'Automovil', 'Chevrolet', 'Spark', '2014-05-01', 24000, null),
-	(14, 'PVJ4812', 'Automovil', 'Nissan', 'Versa', '2016-02-10', 20000, null);
+	(13, 'RWR8485', 'Automovil', 'Chevrolet', 'Spark', '2014-05-01', 24000, 0),
+	(14, 'PVJ4812', 'Automovil', 'Nissan', 'Versa', '2016-02-10', 20000, 0);
 
 INSERT INTO Reservas VALUES 
 	(1, '2019-12-15', '2019-12-30', 2800, 'Morelia'),
@@ -136,11 +132,11 @@ INSERT INTO ReservasAgencias (id_agencia, id_reserva) VALUES
 	(2, 4),
 	(3, 3);
 
-INSERT INTO Involucra (id_reserva, id_vehiculo, precio_alquiler) VALUES
-	(1, 11, 1800),
-	(2, 14, 2000),
-	(3, 10, 1100),
-	(4, 1, 1300);
+INSERT INTO Involucra (id_reserva, id_vehiculo) VALUES
+	(1, 11),
+	(2, 14),
+	(3, 10),
+	(4, 1);
 
 INSERT INTO Garajes VALUES 
 	(1, 'I. Zaragoza 50', 'Morelia', '4431234333'),

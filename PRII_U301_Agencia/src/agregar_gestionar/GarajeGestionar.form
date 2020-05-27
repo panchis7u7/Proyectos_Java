@@ -68,8 +68,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnRefrescar" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="87" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="95" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfIdGaraje" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -153,6 +153,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblGarajesMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -203,11 +206,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Actualizar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnBorrar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Borrar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBorrarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

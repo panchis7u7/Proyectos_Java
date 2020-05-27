@@ -57,7 +57,6 @@ public class AgenciaDAO {
         return id;
     }
     
-    
     public List<AgenciaDTO> agenciaGeneralDAO (){
         List<AgenciaDTO> agencia = new ArrayList<>();
         PreparedStatement consulta = null;
@@ -75,11 +74,66 @@ public class AgenciaDAO {
                 unagencia.setNombre(resultSet.getString(2));
                 unagencia.setCiudad(resultSet.getString(3));
                 unagencia.setTelefono(resultSet.getString(4));
+                agencia.add(unagencia);
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(VehiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AgenciaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return agencia;
     }
+    
+    
+    public int actualizarAgencia(AgenciaDTO nuevoAgencia){
+        PreparedStatement sentenciaSql = null;
+        int resultado = 0;
+        String sql = "UPDATE Agencias SET "
+                + "nombre=?, ciudad=?, telefono=? "
+                + "WHERE id_agencia=?";
+        try {
+            conector.setAutoCommit(false);
+            sentenciaSql = conector.prepareStatement(sql);
+            sentenciaSql.setString(1, nuevoAgencia.getNombre());
+            sentenciaSql.setString(2, nuevoAgencia.getCiudad());
+            sentenciaSql.setString(3, nuevoAgencia.getTelefono());
+            sentenciaSql.setInt(4, nuevoAgencia.getId_agencia());
+            
+            sentenciaSql.executeUpdate();
+            conector.commit();
+            resultado = nuevoAgencia.getId_agencia();
+        } catch (SQLException ex) {
+            resultado = 0;
+            ex.printStackTrace();
+            try {
+                conector.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Error de rollback");
+            }
+        }
+        return resultado;
+    }
+    
+    public int borrarAgencia(AgenciaDTO agencia){
+        PreparedStatement sentenciaSql = null;
+        int resultado = 0;
+        String sql = "DELETE FROM Agencias WHERE id_agencia=?";
+        try {
+            conector.setAutoCommit(false);
+            sentenciaSql = conector.prepareStatement(sql);
+            sentenciaSql.setInt(1, agencia.getId_agencia());
+            sentenciaSql.executeUpdate();
+            conector.commit();
+            resultado = agencia.getId_agencia();
+        } catch (SQLException ex) {
+            resultado = 0;
+            ex.printStackTrace();
+            try {
+                conector.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Error de rollback");
+            }
+        }
+        return resultado;
+    }
+    
 }

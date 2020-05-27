@@ -70,17 +70,72 @@ public class ReservaDAO {
             resultSet = consulta.executeQuery();
             
             while(resultSet.next()){
-                ReservaDTO unareserva = new ReservaDTO();
-                unareserva.setId_reserva(resultSet.getInt(1));
-                unareserva.setFecha_inicio(resultSet.getString(2));
-                unareserva.setFecha_final(resultSet.getString(3));
-                unareserva.setPrecio_t(resultSet.getFloat(4));
-                unareserva.setCiudad(resultSet.getString(5));                
+                ReservaDTO unreserva = new ReservaDTO();
+                unreserva.setId_reserva(resultSet.getInt(1));
+                unreserva.setFecha_inicio(resultSet.getString(2));
+                unreserva.setFecha_final(resultSet.getString(3));
+                unreserva.setPrecio_t(resultSet.getFloat(4));
+                unreserva.setCiudad(resultSet.getString(5));
+                reserva.add(unreserva);
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(VehiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return reserva;
+    }
+    
+    
+    public int actualizarReserva(ReservaDTO nuevoReserva){
+        PreparedStatement sentenciaSql = null;
+        int resultado = 0;
+        String sql = "UPDATE Reservas SET "
+                + "fecha_inicio, fecha_final, precio_t=?, ciudad=? "
+                + "WHERE id_reserva=?";
+        try {
+            conector.setAutoCommit(false);
+            sentenciaSql = conector.prepareStatement(sql);
+            sentenciaSql.setString(1, nuevoReserva.getFecha_inicio());
+            sentenciaSql.setString(2, nuevoReserva.getFecha_final());
+            sentenciaSql.setFloat(3, nuevoReserva.getPrecio_t());
+            sentenciaSql.setString(4, nuevoReserva.getCiudad());
+            sentenciaSql.setInt(5, nuevoReserva.getId_reserva());
+            
+            sentenciaSql.executeUpdate();
+            conector.commit();
+            resultado = nuevoReserva.getId_reserva();
+        } catch (SQLException ex) {
+            resultado = 0;
+            ex.printStackTrace();
+            try {
+                conector.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Error de rollback");
+            }
+        }
+        return resultado;
+    }
+    
+    public int borrarReserva(ReservaDTO reserva){
+        PreparedStatement sentenciaSql = null;
+        int resultado = 0;
+        String sql = "DELETE FROM Reservas WHERE id_reserva=?";
+        try {
+            conector.setAutoCommit(false);
+            sentenciaSql = conector.prepareStatement(sql);
+            sentenciaSql.setInt(1, reserva.getId_reserva());
+            sentenciaSql.executeUpdate();
+            conector.commit();
+            resultado = reserva.getId_reserva();
+        } catch (SQLException ex) {
+            resultado = 0;
+            ex.printStackTrace();
+            try {
+                conector.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Error de rollback");
+            }
+        }
+        return resultado;
     }
 }
