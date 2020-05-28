@@ -212,7 +212,7 @@ public class VehiculoGestionar extends javax.swing.JPanel {
         vehiculo.setMarca(tfMarca.getText());
         vehiculo.setModelo(tfModelo.getText());
         vehiculo.setFabrica(tfFabrica.getText());
-        vehiculo.setCosto(Float.parseFloat(tfFabrica.getText()));
+        vehiculo.setCosto(Float.parseFloat(tfCosto.getText()));
         vehiculo.setCarga(Integer.parseInt(tfCarga.getText()));
         
         int resp = JOptionPane.showConfirmDialog(null, "¿Deseas modificarlo?",

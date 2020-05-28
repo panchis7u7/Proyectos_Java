@@ -221,8 +221,25 @@ public class ReservaGestionar extends javax.swing.JPanel {
     }//GEN-LAST:event_tfCiudadActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBorrarActionPerformed
+        ReservaDTO reserva = new ReservaDTO();
+        reserva.setId_reserva(Integer.parseInt(tfIdReserva.getText()));
+        
+        int resp = JOptionPane.showConfirmDialog(null, "¿Realmente deseas eliminar?",
+                "Confirmar ELIMINACION", JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        
+        if(resp == 0){
+            Conector cone = new Conector();
+            ReservaDAO reservaDAO =new ReservaDAO(cone.miconector);
+            int resultado = reservaDAO.borrarReserva(reserva);
+            if(resultado > 0){
+                JOptionPane.showMessageDialog(null, "Eliminación exitosa");
+                refrescar();
+            }else
+                JOptionPane.showMessageDialog(null, "Eliminación errónea");
+            cone.cerrar();
+            
+        }    }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
         refrescar();

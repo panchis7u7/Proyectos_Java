@@ -36,7 +36,7 @@ public class ReservaDAO {
             conector.setAutoCommit(false);
             objetoSentSql = conector.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             objetoSentSql.setInt(1, reserva.getId_reserva());
-            objetoSentSql.setString(2, reserva.getFecha_final());
+            objetoSentSql.setString(2, reserva.getFecha_inicio());
             objetoSentSql.setString(3, reserva.getFecha_final());
             objetoSentSql.setFloat(4, reserva.getPrecio_t());
             objetoSentSql.setString(5, reserva.getCiudad());
@@ -80,7 +80,7 @@ public class ReservaDAO {
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReservaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return reserva;
     }
@@ -90,7 +90,7 @@ public class ReservaDAO {
         PreparedStatement sentenciaSql = null;
         int resultado = 0;
         String sql = "UPDATE Reservas SET "
-                + "fecha_inicio, fecha_final, precio_t=?, ciudad=? "
+                + "fecha_inicio=?, fecha_final=?, precio_t=?, ciudad=? "
                 + "WHERE id_reserva=?";
         try {
             conector.setAutoCommit(false);
@@ -114,9 +114,11 @@ public class ReservaDAO {
             }
         }
         return resultado;
+        
     }
     
     public int borrarReserva(ReservaDTO reserva){
+        
         PreparedStatement sentenciaSql = null;
         int resultado = 0;
         String sql = "DELETE FROM Reservas WHERE id_reserva=?";

@@ -4,7 +4,7 @@ VEHICULO:
 
 RESERVAS
 - actualizar
-- borrar
+
 
 //////////////////////////
 
