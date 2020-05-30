@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteCliente" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d73976ea-78d9-4006-a36b-a3bf14fac99d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="id_cliente" class="java.lang.Integer"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="apellidos" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="correo" class="java.lang.String"/>
+	<field name="ciudad" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="0" width="572" height="79" backcolor="#CCCCFF" uuid="cab051dc-63e5-4112-9c34-91cd12a8b622"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="218" y="16" width="159" height="58" uuid="00fbc537-6baa-4947-99f8-abbf81c04b58"/>
+				<textElement>
+					<font fontName="Cambria" size="40"/>
+				</textElement>
+				<text><![CDATA[Clientes]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="25" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="39" height="31" forecolor="#000099" uuid="90f86580-4e59-4c67-9db6-2627eacac4fe"/>
+				<textElement>
+					<font fontName="Cambria" size="16"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="57" y="0" width="130" height="31" forecolor="#000099" uuid="069162d6-07a6-45c1-8d45-cc6c799d8c44"/>
+				<textElement>
+					<font fontName="Cambria" size="16"/>
+				</textElement>
+				<text><![CDATA[Nombre(s)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="205" y="0" width="155" height="31" forecolor="#000099" uuid="233a6eb6-6acf-473d-8770-e5087d4a3298"/>
+				<textElement>
+					<font fontName="Cambria" size="16"/>
+				</textElement>
+				<text><![CDATA[Apellidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="388" y="0" width="172" height="31" forecolor="#000099" uuid="7d95a70f-8de3-4adb-8f13-a35df5310ebd"/>
+				<textElement>
+					<font fontName="Cambria" size="16"/>
+				</textElement>
+				<text><![CDATA[Direccion ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="9" width="39" height="21" uuid="3fe17382-9288-41d2-b17d-c3bb7dc219cf"/>
+				<textElement>
+					<font fontName="Cambria" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="9" width="130" height="21" uuid="e834a45e-7a06-46b4-b5cf-d2b4913ef821"/>
+				<textElement>
+					<font fontName="Cambria" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}
+]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="205" y="9" width="155" height="21" uuid="a0b59db1-2ff4-494c-ac7b-6cae7ce97242"/>
+				<textElement>
+					<font fontName="Cambria" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{apellidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="388" y="9" width="184" height="21" uuid="279abde5-86c2-4797-a199-a097af55648b"/>
+				<textElement>
+					<font fontName="Cambria" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="31" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

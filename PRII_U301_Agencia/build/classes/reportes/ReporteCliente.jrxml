@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteCliente" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d73976ea-78d9-4006-a36b-a3bf14fac99d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="id_cliente" class="java.lang.Integer"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="apellidos" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="correo" class="java.lang.String"/>
+	<field name="ciudad" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="0" width="572" height="79" backcolor="#FF9999" uuid="cab051dc-63e5-4112-9c34-91cd12a8b622"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="218" y="16" width="159" height="58" uuid="00fbc537-6baa-4947-99f8-abbf81c04b58"/>
+				<textElement>
+					<font fontName="Cambria" size="40"/>
+				</textElement>
+				<text><![CDATA[Clientes]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="13" y="19" width="50" height="35" uuid="3fe17382-9288-41d2-b17d-c3bb7dc219cf"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[ID]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="98" y="19" width="71" height="35" uuid="e834a45e-7a06-46b4-b5cf-d2b4913ef821"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[Nombre]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="218" y="19" width="71" height="35" uuid="a0b59db1-2ff4-494c-ac7b-6cae7ce97242"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[Apellidos]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="343" y="19" width="71" height="35" uuid="279abde5-86c2-4797-a199-a097af55648b"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[Direccion]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="473" y="19" width="71" height="35" uuid="a43b5cb9-fcfd-4f03-adcb-96b06a3157cf"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[Telefono]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
