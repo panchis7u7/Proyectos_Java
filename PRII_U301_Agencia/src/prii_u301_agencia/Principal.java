@@ -12,7 +12,10 @@ import agregar_gestionar.GarajeAgregar;
 import agregar_gestionar.GarajeGestionar;
 import agregar_gestionar.ReservaAgregar;
 import agregar_gestionar.ReservaGestionar;
+import agregar_gestionar.ReservasClientesGestionar;
 import agregar_gestionar.VehiculoAgregar;
+import agregar_gestionar.VehiculoDAO;
+import agregar_gestionar.VehiculoDTO;
 import agregar_gestionar.VehiculoGestionar;
 //=======
 //>>>>>>> f289be80d4a9e9abe0472f884b97ea1fc25a2481
@@ -67,18 +70,18 @@ public class Principal extends javax.swing.JFrame {
         jmVehiculos = new javax.swing.JMenu();
         miAgVehiculo = new javax.swing.JMenuItem();
         miGeVehiculo = new javax.swing.JMenuItem();
+        miRepVehiculo = new javax.swing.JMenuItem();
         jmGarajes = new javax.swing.JMenu();
         miAgGaraje = new javax.swing.JMenuItem();
         miGeGaraje = new javax.swing.JMenuItem();
         jmAgencias = new javax.swing.JMenu();
         miAgAgencia = new javax.swing.JMenuItem();
         miGeAgencia = new javax.swing.JMenuItem();
+        mitExit = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         miAgReserva = new javax.swing.JMenuItem();
         miGeReserva = new javax.swing.JMenuItem();
-        mitExit = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        miClientesReservas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,7 +113,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jmClientes.add(miGeCliente);
 
-        miRepCliente.setText("Reporte");
+        miRepCliente.setText("Reporte de clientes");
         miRepCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miRepClienteActionPerformed(evt);
@@ -137,6 +140,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jmVehiculos.add(miGeVehiculo);
+
+        miRepVehiculo.setText("Reporte de vehiculos");
+        miRepVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miRepVehiculoActionPerformed(evt);
+            }
+        });
+        jmVehiculos.add(miRepVehiculo);
 
         jmGarajes.setText("Garajes");
 
@@ -180,6 +191,16 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu1.add(jmAgencias);
 
+        mitExit.setText("Exit");
+        mitExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitExitActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mitExit);
+
+        jMenuBar1.add(jMenu1);
+
         jMenu2.setText("Reservas");
 
         miAgReserva.setText("Agregar reserva");
@@ -198,24 +219,15 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu2.add(miGeReserva);
 
-        jMenu1.add(jMenu2);
-
-        mitExit.setText("Exit");
-        mitExit.addActionListener(new java.awt.event.ActionListener() {
+        miClientesReservas.setText("Clientes y reservas");
+        miClientesReservas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mitExitActionPerformed(evt);
+                miClientesReservasActionPerformed(evt);
             }
         });
-        jMenu1.add(mitExit);
+        jMenu2.add(miClientesReservas);
 
-        jMenuBar1.add(jMenu1);
-
-        jMenu3.setText("Procesos");
-
-        jMenuItem1.setText("jMenuItem1");
-        jMenu3.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -359,6 +371,31 @@ public class Principal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_miRepClienteActionPerformed
 
+    private void miClientesReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miClientesReservasActionPerformed
+        JInternalFrame vhija = new JInternalFrame("Clientes y Reservas", false, true, false, false);
+        ReservasClientesGestionar  hijo = new ReservasClientesGestionar();
+        vhija.add(hijo);
+        vhija.pack();
+        vhija.setVisible(true);
+        escritorio.add(vhija);
+    }//GEN-LAST:event_miClientesReservasActionPerformed
+
+    private void miRepVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRepVehiculoActionPerformed
+        Conector conector = new Conector();
+        VehiculoDAO vehiculoDAO = new VehiculoDAO(conector.miconector);
+        List<VehiculoDTO> vehiculos = vehiculoDAO.vehiculoGeneralDAO(); 
+        try{
+            JasperReport jr= (JasperReport) JRLoader.loadObjectFromFile("src\\reportes\\ReporteVehiculo.jasper");
+            JasperPrint jp= JasperFillManager.fillReport(jr,null,new JRBeanCollectionDataSource(vehiculos));
+            JasperViewer jv = new JasperViewer(jp, false);
+            jv.setVisible(true); 
+            jv.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        conector.cerrar();
+    }//GEN-LAST:event_miRepVehiculoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -397,9 +434,7 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jmAgencias;
     private javax.swing.JMenu jmClientes;
     private javax.swing.JMenu jmGarajes;
@@ -409,12 +444,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem miAgGaraje;
     private javax.swing.JMenuItem miAgReserva;
     private javax.swing.JMenuItem miAgVehiculo;
+    private javax.swing.JMenuItem miClientesReservas;
     private javax.swing.JMenuItem miGeAgencia;
     private javax.swing.JMenuItem miGeCliente;
     private javax.swing.JMenuItem miGeGaraje;
     private javax.swing.JMenuItem miGeReserva;
     private javax.swing.JMenuItem miGeVehiculo;
     private javax.swing.JMenuItem miRepCliente;
+    private javax.swing.JMenuItem miRepVehiculo;
     private javax.swing.JMenuItem mitExit;
     private javax.swing.JMenuItem mit_Agencia;
     // End of variables declaration//GEN-END:variables

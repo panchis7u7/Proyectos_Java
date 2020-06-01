@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteVehiculo" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5364b4e1-0458-42ca-a051-418cc5242f04">
+	<property name="ireport.zoom" value="1.1"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="id_vehiculo" class="java.lang.Integer"/>
+	<field name="matricula" class="java.lang.String"/>
+	<field name="tipo" class="java.lang.String"/>
+	<field name="marca" class="java.lang.String"/>
+	<field name="modelo" class="java.lang.String"/>
+	<field name="costo" class="java.lang.Float"/>
+	<field name="carga" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="0" width="572" height="79" backcolor="#CCCCFF" uuid="eb4724af-1701-4614-959b-0914e8a52ec9"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="199" y="16" width="208" height="63" uuid="6296c788-3f12-4137-80f9-db64ac65050c"/>
+				<textElement>
+					<font fontName="Cambria" size="40"/>
+				</textElement>
+				<text><![CDATA[Vehiculos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="26" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="335" y="5" width="90" height="31" forecolor="#000099" uuid="75fb8bcb-8541-43bf-8a6a-ac21922d69eb"/>
+				<textElement>
+					<font fontName="Cambria" size="16"/>
+				</textElement>
+				<text><![CDATA[Modelo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="5" width="39" height="31" forecolor="#000099" uuid="a357a98b-2706-4c78-bc3a-84ce8cf20288"/>
+				<textElement>
+					<font fontName="Cambria" size="16"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="67" y="5" width="107" height="31" forecolor="#000099" uuid="a0517b8f-e7f4-4472-8e00-2adafccb8029"/>
+				<textElement>
+					<font fontName="Cambria" size="16"/>
+				</textElement>
+				<text><![CDATA[Matricula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="199" y="5" width="112" height="31" forecolor="#000099" uuid="1dbdb366-b822-4aba-917a-175eb5801411"/>
+				<textElement>
+					<font fontName="Cambria" size="16"/>
+				</textElement>
+				<text><![CDATA[Marca]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="464" y="5" width="90" height="31" forecolor="#000099" uuid="863abf16-73dc-456b-9353-6ac9407cc4a0"/>
+				<textElement>
+					<font fontName="Cambria" size="16"/>
+				</textElement>
+				<text><![CDATA[Costo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="4" width="39" height="21" uuid="a5985016-63ab-44e7-9041-a8c7db19fb8d"/>
+				<textElement>
+					<font fontName="Cambria" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_vehiculo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="67" y="4" width="107" height="21" uuid="757661ce-d248-4e74-975c-c9e44bba9ba3"/>
+				<textElement>
+					<font fontName="Cambria" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{matricula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="199" y="4" width="107" height="21" uuid="ed0e05bf-e19c-4a81-8dad-2b8e211480c7"/>
+				<textElement>
+					<font fontName="Cambria" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="335" y="4" width="107" height="21" uuid="bfd7078a-5a01-48e2-b80a-a0c8dd53e285"/>
+				<textElement>
+					<font fontName="Cambria" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{modelo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="464" y="4" width="107" height="21" uuid="6bd27501-b028-4728-a211-61362e2da3dd"/>
+				<textElement>
+					<font fontName="Cambria" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{costo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

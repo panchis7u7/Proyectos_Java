@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Katherine%20Arzate/Documents/NetBeansProjects/PRII_U301_Agencia/src/agregar_gestionar/ClienteGestionar.java</file>
+            <file>file:/C:/Users/Katherine%20Arzate/Documents/NetBeansProjects/PRII_U301_Agencia/src/reportes/ReporteVehiculo.jrxml</file>
             <file>file:/C:/Users/Katherine%20Arzate/Documents/NetBeansProjects/PRII_U301_Agencia/src/prii_u301_agencia/Principal.java</file>
-            <file>file:/C:/Users/Katherine%20Arzate/Documents/NetBeansProjects/PRII_U301_Agencia/src/agregar_gestionar/ClienteDAO.java</file>
-            <file>file:/C:/Users/Katherine%20Arzate/Documents/NetBeansProjects/PRII_U301_Agencia/src/agregar_gestionar/ReservaAgregar.java</file>
-            <file>file:/C:/Users/Katherine%20Arzate/Documents/NetBeansProjects/PRII_U301_Agencia/src/agregar_gestionar/ClienteAgregar.java</file>
+            <file>file:/C:/Users/Katherine%20Arzate/Documents/NetBeansProjects/PRII_U301_Agencia/src/reportes/ReporteCliente.jrxml</file>
         </group>
     </open-files>
 </project-private>

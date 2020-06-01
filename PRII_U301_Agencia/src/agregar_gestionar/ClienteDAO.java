@@ -59,13 +59,15 @@ public class ClienteDAO {
         return id;
     }
     
+    
     public List<ClienteDTO> clienteGeneralDAO (){
-        List<ClienteDTO> cliente = new ArrayList<>();
+        List<ClienteDTO> clientes = new ArrayList<>();
         PreparedStatement consulta = null;
         ResultSet resultSet = null;
         String consultasSQL = "SELECT "
                 + "id_cliente, nombre, apellidos, direccion, telefono, correo, ciudad "
                 + "FROM Clientes";
+            
         try {
             consulta = conector.prepareStatement(consultasSQL);
             resultSet = consulta.executeQuery();
@@ -79,13 +81,13 @@ public class ClienteDAO {
                 uncliente.setTelefono(resultSet.getString(5));
                 uncliente.setCorreo(resultSet.getString(6));
                 uncliente.setCiudad(resultSet.getString(7));
-                cliente.add(uncliente);
+                clientes.add(uncliente);
             }
             
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return cliente;
+        return clientes;
     }
     
     

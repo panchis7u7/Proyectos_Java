@@ -5,6 +5,8 @@
  */
 package agregar_gestionar;
 
+import java.util.List;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -19,7 +21,7 @@ public class ReservaAgregar extends javax.swing.JPanel {
      */
     public ReservaAgregar() {
         initComponents();
-        
+        refrescar();
     }
 
     /**
@@ -43,7 +45,6 @@ public class ReservaAgregar extends javax.swing.JPanel {
         btnAgregar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         cbCliente = new javax.swing.JComboBox<>();
-        tfApellidos = new javax.swing.JTextField();
 
         jLabel1.setText("Fecha inicial:");
 
@@ -81,48 +82,46 @@ public class ReservaAgregar extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addComponent(jLabel5)
-                                .addGap(39, 39, 39)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfApellidos)
-                                    .addComponent(cbCliente, 0, 174, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel1))
-                                .addGap(47, 47, 47))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfFechaInicio)
-                            .addComponent(tfFechaFinal)
-                            .addComponent(tfPrecio)
-                            .addComponent(tfCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addGap(18, 18, 18)
+                            .addComponent(cbCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel1))
+                                    .addGap(47, 47, 47))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(18, 18, 18)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(tfFechaInicio)
+                                .addComponent(tfFechaFinal)
+                                .addComponent(tfPrecio)
+                                .addComponent(tfCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(0, 35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
                     .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(tfApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,7 +130,7 @@ public class ReservaAgregar extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(64, 64, 64)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
         );
@@ -147,7 +146,8 @@ public class ReservaAgregar extends javax.swing.JPanel {
         Conector conec = new Conector();
       
         ReservaDAO reservaDAO = new ReservaDAO(conec.miconector);
-        int id = reservaDAO.agregarReserva(reserva);
+        int id = reservaDAO.agregarReservaCliente(reserva, ((ClienteDTO) cbCliente.getSelectedItem()));
+        
         if(id>0){
             JOptionPane.showMessageDialog(null, "Inserción exitosa");
         }else
@@ -160,27 +160,22 @@ public class ReservaAgregar extends javax.swing.JPanel {
     }//GEN-LAST:event_tfFechaFinalActionPerformed
 
     private void cbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbClienteActionPerformed
-        ClienteDTO cliente = new ClienteDTO();
-        
-        cliente.setApellidos(tfApellidos.getText());
-        
-        Conector conec = new Conector();
-      
-        ClienteDAO clienteDAO = new ClienteDAO(conec.miconector);
-        int id = clienteDAO.agregarCliente(cliente);
-        if(id>0){
-            JOptionPane.showMessageDialog(null, "Inserción exitosa");
-        }else
-            JOptionPane.showMessageDialog(null, "Inserción fallida");
-        conec.cerrar();
-        
-        /*
-        String selec[]= {};
-        clienteSelec = new DefaultComboBoxModel(selec);
-        cbCliente.setModel(clienteSelec);        
-        */
+
     }//GEN-LAST:event_cbClienteActionPerformed
 
+    public void refrescar(){
+        Conector cone = new Conector();
+        
+        ClienteDAO clienteDAO = new ClienteDAO(cone.miconector);
+        List <ClienteDTO> clientes = clienteDAO.clienteGeneralDAO();
+        clienteSelec = new DefaultComboBoxModel();
+        clienteSelec.addAll(clientes);
+        cbCliente.setModel(clienteSelec);
+        
+        ClienteDTO cliente = (ClienteDTO)cbCliente.getSelectedItem();
+        cone.cerrar();
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
@@ -191,10 +186,11 @@ public class ReservaAgregar extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField tfApellidos;
     private javax.swing.JTextField tfCiudad;
     private javax.swing.JTextField tfFechaFinal;
     private javax.swing.JTextField tfFechaInicio;
     private javax.swing.JTextField tfPrecio;
     // End of variables declaration//GEN-END:variables
+
+    
 }

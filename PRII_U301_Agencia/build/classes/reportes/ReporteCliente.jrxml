@@ -16,7 +16,7 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<rectangle radius="10">
-				<reportElement x="0" y="0" width="572" height="79" backcolor="#FF9999" uuid="cab051dc-63e5-4112-9c34-91cd12a8b622"/>
+				<reportElement x="0" y="0" width="572" height="79" backcolor="#CCCCFF" uuid="cab051dc-63e5-4112-9c34-91cd12a8b622"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="218" y="16" width="159" height="58" uuid="00fbc537-6baa-4947-99f8-abbf81c04b58"/>
@@ -28,52 +28,75 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="25" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="39" height="31" forecolor="#000099" uuid="90f86580-4e59-4c67-9db6-2627eacac4fe"/>
+				<textElement>
+					<font fontName="Cambria" size="16"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="57" y="0" width="130" height="31" forecolor="#000099" uuid="069162d6-07a6-45c1-8d45-cc6c799d8c44"/>
+				<textElement>
+					<font fontName="Cambria" size="16"/>
+				</textElement>
+				<text><![CDATA[Nombre(s)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="205" y="0" width="155" height="31" forecolor="#000099" uuid="233a6eb6-6acf-473d-8770-e5087d4a3298"/>
+				<textElement>
+					<font fontName="Cambria" size="16"/>
+				</textElement>
+				<text><![CDATA[Apellidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="388" y="0" width="172" height="31" forecolor="#000099" uuid="7d95a70f-8de3-4adb-8f13-a35df5310ebd"/>
+				<textElement>
+					<font fontName="Cambria" size="16"/>
+				</textElement>
+				<text><![CDATA[Direccion ]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="54" splitType="Stretch">
+		<band height="35" splitType="Stretch">
 			<textField>
-				<reportElement x="13" y="19" width="50" height="35" uuid="3fe17382-9288-41d2-b17d-c3bb7dc219cf"/>
+				<reportElement x="0" y="9" width="39" height="21" uuid="3fe17382-9288-41d2-b17d-c3bb7dc219cf"/>
 				<textElement>
-					<font size="16"/>
+					<font fontName="Cambria" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[ID]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{id_cliente}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="98" y="19" width="71" height="35" uuid="e834a45e-7a06-46b4-b5cf-d2b4913ef821"/>
+				<reportElement x="57" y="9" width="130" height="21" uuid="e834a45e-7a06-46b4-b5cf-d2b4913ef821"/>
 				<textElement>
-					<font size="16"/>
+					<font fontName="Cambria" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[Nombre]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nombre}
+]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="218" y="19" width="71" height="35" uuid="a0b59db1-2ff4-494c-ac7b-6cae7ce97242"/>
+				<reportElement x="205" y="9" width="155" height="21" uuid="a0b59db1-2ff4-494c-ac7b-6cae7ce97242"/>
 				<textElement>
-					<font size="16"/>
+					<font fontName="Cambria" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[Apellidos]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{apellidos}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="343" y="19" width="71" height="35" uuid="279abde5-86c2-4797-a199-a097af55648b"/>
+				<reportElement x="388" y="9" width="184" height="21" uuid="279abde5-86c2-4797-a199-a097af55648b"/>
 				<textElement>
-					<font size="16"/>
+					<font fontName="Cambria" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[Direccion]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="473" y="19" width="71" height="35" uuid="a43b5cb9-fcfd-4f03-adcb-96b06a3157cf"/>
-				<textElement>
-					<font size="16"/>
-				</textElement>
-				<textFieldExpression><![CDATA[Telefono]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="31" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch"/>

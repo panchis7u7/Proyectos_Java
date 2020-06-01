@@ -25,6 +25,11 @@ public class ClienteDTO {
     private int id_cliente;
     private String nombre, apellidos, direccion, telefono, correo, ciudad;
 
+    @Override
+    public String toString(){
+        return this.nombre + " " + this.apellidos;
+    }
+    
     public int getId_cliente() {
         return id_cliente;
     }
